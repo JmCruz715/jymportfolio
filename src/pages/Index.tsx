@@ -105,11 +105,6 @@ const Index = () => {
 
       {/* Main content */}
       <main className="max-w-md mx-auto px-5 py-20 flex flex-col gap-8">
-        {/* Link sections at top */}
-        <div className="flex flex-col gap-4">
-          <LinkSection title="Tools" count={5} emoji="🛠️" links={tools} />
-          <LinkSection title="Downloader" count={6} emoji="⬇️" links={downloaders} />
-        </div>
 
         {/* Profile */}
         <ProfileCard />
