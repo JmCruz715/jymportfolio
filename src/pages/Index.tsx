@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Moon, Menu, X, ExternalLink } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Moon, Sun, Menu, X, ExternalLink } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
@@ -26,13 +26,31 @@ const downloaders = [
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") !== "light";
+    }
+    return true;
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
 
   return (
     <div className="min-h-screen bg-background relative">
       {/* Top bar */}
       <div className="fixed top-0 right-0 p-4 flex items-center gap-3 z-30 animate-fade-in">
-        <button className="text-accent hover:text-accent/80 transition-colors active:scale-95">
-          <Moon className="w-6 h-6" />
+        <button
+          onClick={() => setIsDark(!isDark)}
+          className="text-accent hover:text-accent/80 transition-colors active:scale-95">
+          {isDark ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
         </button>
         <button
           onClick={() => setMenuOpen(!menuOpen)}
