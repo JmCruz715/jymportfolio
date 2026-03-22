@@ -3,7 +3,7 @@ import { Facebook, Instagram, Github } from "lucide-react";
 const socials = [
   { icon: Facebook, href: "https://www.facebook.com/jm.born67", label: "Facebook" },
   { icon: Instagram, href: "https://www.instagram.com/zenoshin11/", label: "Instagram" },
-  { icon: Github, href: "https://github.com/mysterioussq", label: "GitHub" },
+  { icon: Github, href: "https://github.com/JmCruz715", label: "GitHub" },
 ];
 
 const SocialLinks = () => (
