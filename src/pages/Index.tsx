@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun, Menu, X, ExternalLink } from "lucide-react";
+import { Moon, Sun, Menu, X, ExternalLink, ShoppingBag } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
