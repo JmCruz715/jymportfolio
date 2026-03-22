@@ -61,6 +61,7 @@ const Index = () => {
       </div>
 
       {/* Slide-out menu */}
+      {/* Note: Shop button is inside the menu */}
       {menuOpen &&
       <div className="fixed inset-0 z-20" onClick={() => setMenuOpen(false)}>
           <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
