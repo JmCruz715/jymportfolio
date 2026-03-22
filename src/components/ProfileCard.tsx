@@ -16,7 +16,7 @@ const ProfileCard = () => (
     {/* Name & Role */}
     <div className="text-center">
       <h1 className="text-2xl font-bold text-foreground flex items-center justify-center gap-1.5 leading-tight">
-        Siegfried Samá
+        jmcruz
         <BadgeCheck className="w-5 h-5 text-blue-400" />
       </h1>
       <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mt-1.5">Developer</p>
