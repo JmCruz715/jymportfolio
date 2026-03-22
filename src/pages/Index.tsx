@@ -61,13 +61,28 @@ const Index = () => {
       </div>
 
       {/* Slide-out menu */}
-      {/* Note: Shop button is inside the menu */}
       {menuOpen &&
       <div className="fixed inset-0 z-20" onClick={() => setMenuOpen(false)}>
           <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
           <div
           className="absolute right-0 top-0 h-full w-72 bg-card border-l border-border p-6 pt-16 overflow-y-auto animate-fade-in"
           onClick={(e) => e.stopPropagation()}>
+
+            {/* Shop */}
+            <div className="mb-6">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group active:scale-[0.98]">
+                <ShoppingBag className="w-5 h-5 text-primary" />
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Shop</p>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">Visit my store</p>
+                </div>
+                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 ml-auto" />
+              </a>
+            </div>
           
             {/* Tools */}
             <div className="mb-6">
