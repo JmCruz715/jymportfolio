@@ -124,7 +124,7 @@ const Index = () => {
         {/* Footer */}
         <footer className="text-center animate-fade-up" style={{ animationDelay: "0.6s" }}>
           <p className="text-xs text-muted-foreground">
-            © 2026 | Developed by: <span className="text-primary">Siegfried Samá</span>
+            © 2026 | Developed by: <span className="text-primary">jmcruz</span>
           </p>
         </footer>
       </main>
