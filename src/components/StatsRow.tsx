@@ -1,5 +1,5 @@
 const stats = [
-  { value: "2203", label: "Year of birth" },
+  { value: "2009", label: "Year of birth" },
   { value: "+1M", label: "Likes" },
   { value: "Philippines", label: "Location" },
 ];
