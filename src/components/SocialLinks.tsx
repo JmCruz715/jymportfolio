@@ -15,7 +15,7 @@ const SocialLinks = () => (
         target="_blank"
         rel="noopener noreferrer"
         title={label}
-        className="w-10 h-10 rounded-full flex items-center justify-center bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-200 active:scale-95"
+        className="w-10 h-10 rounded-full flex items-center justify-center bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-200 active:scale-95 hover:scale-110 hover:shadow-lg"
       >
         <Icon className="w-[18px] h-[18px]" />
       </a>

@@ -34,7 +34,7 @@ const BatteryIndicator = () => {
 
   return (
     <div
-      className="card-surface px-5 py-3 flex items-center justify-center gap-2 animate-fade-up"
+      className="card-surface px-5 py-3 flex items-center justify-center gap-2 animate-fade-up hover:scale-[1.02] transition-transform duration-300"
       style={{ animationDelay: "0.55s" }}
     >
       {getIcon()}

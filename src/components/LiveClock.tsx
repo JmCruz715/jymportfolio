@@ -17,7 +17,7 @@ const LiveClock = () => {
   });
 
   return (
-    <div className="card-surface p-5 text-center animate-fade-up" style={{ animationDelay: "0.5s" }}>
+    <div className="card-surface p-5 text-center animate-fade-up hover:scale-[1.02] transition-transform duration-300" style={{ animationDelay: "0.5s" }}>
       <p className="font-mono text-2xl font-medium tracking-tight text-foreground">{formatted}</p>
       <p className="text-xs text-primary font-medium mt-1 tracking-widest uppercase">Local Time</p>
       <p className="text-[10px] text-muted-foreground mt-0.5">PHT (GMT+8)</p>
