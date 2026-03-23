@@ -1,4 +1,4 @@
-import { BadgeCheck } from "lucide-react";
+import { Check } from "lucide-react";
 
 const ProfileCard = () =>
 <div className="flex flex-col items-center gap-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
