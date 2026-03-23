@@ -3,13 +3,13 @@ import { Check } from "lucide-react";
 const ProfileCard = () =>
 <div className="flex flex-col items-center gap-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
     {/* Avatar */}
-    <div className="relative">
-      <div className="w-28 h-28 rounded-full p-[3px] bg-gradient-to-br from-primary to-pink-400">
+    <div className="relative animate-float">
+      <div className="w-28 h-28 rounded-full p-[3px] bg-gradient-to-br from-primary to-pink-400 animate-pulse-glow">
         <img
-
-        alt="Siegfried Samá"
-        className="w-full h-full rounded-full object-cover bg-card" src="/lovable-uploads/f77014f9-190b-49ff-902d-3d1981b8391e.jpg" />
-      
+          alt="Siegfried Samá"
+          className="w-full h-full rounded-full object-cover bg-card"
+          src="/lovable-uploads/f77014f9-190b-49ff-902d-3d1981b8391e.jpg"
+        />
       </div>
     </div>
 
