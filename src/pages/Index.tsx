@@ -63,14 +63,14 @@ const Index = () => {
 
       {/* Slide-out menu */}
       {menuOpen &&
-      <div className="fixed inset-0 z-20" onClick={() => setMenuOpen(false)}>
-          <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
+      <div className="fixed inset-0 z-20 animate-fade-in" onClick={() => setMenuOpen(false)}>
+          <div className="absolute inset-0 bg-background/60 backdrop-blur-sm transition-opacity duration-300" />
           <div
-          className="absolute right-0 top-0 h-full w-72 bg-card border-l border-border p-6 pt-16 overflow-y-auto animate-fade-in"
+          className="absolute right-0 top-0 h-full w-72 bg-card border-l border-border p-6 pt-16 overflow-y-auto animate-slide-in-right"
           onClick={(e) => e.stopPropagation()}>
 
             {/* Shop */}
-            <div className="mb-6">
+            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
               <a
                 href="https://sociabuzz.com/zenoshin1"
                 target="_blank"
@@ -86,7 +86,7 @@ const Index = () => {
             </div>
           
             {/* Tools */}
-            <div className="mb-6">
+            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
               <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-3 flex items-center gap-2">
                 <span>🛠️</span> Tools
                 <span className="text-[10px] bg-primary/20 text-primary font-mono px-1.5 py-0.5 rounded">{tools.length}</span>
@@ -111,7 +111,7 @@ const Index = () => {
             </div>
 
             {/* Downloaders */}
-            <div>
+            <div className="animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "backwards" }}>
               <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-3 flex items-center gap-2">
                 <span>⬇️</span> Downloader
                 <span className="text-[10px] bg-primary/20 text-primary font-mono px-1.5 py-0.5 rounded">{downloaders.length}</span>
