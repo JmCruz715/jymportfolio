@@ -1,4 +1,4 @@
-import { BadgeCheck } from "lucide-react";
+import { Check } from "lucide-react";
 
 const ProfileCard = () =>
 <div className="flex flex-col items-center gap-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
@@ -17,7 +17,9 @@ const ProfileCard = () =>
     <div className="text-center">
       <h1 className="text-2xl font-bold text-foreground flex items-center justify-center gap-1.5 leading-tight">
         jmcruz
-        <BadgeCheck className="w-5 h-5 text-blue-400" />
+        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[hsl(214,89%,52%)] shrink-0">
+          <Check className="w-3 h-3 text-white stroke-[3]" />
+        </span>
       </h1>
       <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mt-1.5">Developer</p>
       <p className="text-xs text-muted-foreground mt-2 italic">(beta)</p>
