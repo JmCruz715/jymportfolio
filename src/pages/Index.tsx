@@ -70,7 +70,7 @@ const Index = () => {
           onClick={(e) => e.stopPropagation()}>
 
             {/* Shop */}
-            <div className="mb-6">
+            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
               <a
                 href="https://sociabuzz.com/zenoshin1"
                 target="_blank"
