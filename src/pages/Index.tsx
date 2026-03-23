@@ -111,7 +111,7 @@ const Index = () => {
             </div>
 
             {/* Downloaders */}
-            <div>
+            <div className="animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "backwards" }}>
               <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-3 flex items-center gap-2">
                 <span>⬇️</span> Downloader
                 <span className="text-[10px] bg-primary/20 text-primary font-mono px-1.5 py-0.5 rounded">{downloaders.length}</span>
