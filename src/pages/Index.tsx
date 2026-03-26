@@ -156,17 +156,18 @@ const Index = () => {
         {/* Battery */}
         <BatteryIndicator />
 
-        {/* Spotify Player */}
+        {/* YouTube Player */}
         <div className="animate-fade-up" style={{ animationDelay: "0.55s" }}>
           <iframe
             style={{ borderRadius: "12px" }}
-            src="https://open.spotify.com/embed/track/5XeFesFbtLpXzIVDNQP22n?utm_source=generator&theme=0"
+            src="https://www.youtube.com/embed/nyuo9-OjNNg?autoplay=0"
             width="100%"
             height="152"
             frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
             loading="lazy"
-            title="Spotify - Wanna Be Yours"
+            title="Arctic Monkeys - I Wanna Be Yours"
           />
         </div>
 
