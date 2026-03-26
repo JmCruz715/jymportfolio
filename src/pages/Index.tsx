@@ -156,6 +156,20 @@ const Index = () => {
         {/* Battery */}
         <BatteryIndicator />
 
+        {/* Spotify Player */}
+        <div className="animate-fade-up" style={{ animationDelay: "0.55s" }}>
+          <iframe
+            style={{ borderRadius: "12px" }}
+            src="https://open.spotify.com/embed/track/5XeFesFbtLpXzIVDNQP22n?utm_source=generator&theme=0"
+            width="100%"
+            height="80"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Spotify - Wanna Be Yours"
+          />
+        </div>
+
         {/* Footer */}
         <footer className="text-center animate-fade-up" style={{ animationDelay: "0.6s" }}>
           <p className="text-xs text-muted-foreground">
