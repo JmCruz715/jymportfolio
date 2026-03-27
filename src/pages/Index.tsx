@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Moon, Sun, Menu, X, ExternalLink, ShoppingBag } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
@@ -13,7 +14,8 @@ const tools = [
 { title: "SMS Bomber", description: "Spam any PH number", href: "https://mysteriousq-sms-bomber.onrender.com/" },
 { title: "TempMail", description: "Generate temporary email", href: "https://mysteriousq-tempmail.onrender.com/" },
 { title: "Website Screenshot", description: "Capture any website", href: "https://mysteriousq-website-screenshot.onrender.com/" },
-{ title: "V2LMlbb", description: "V2LMlbb tool", href: "https://website-replica--hunterzeno88.replit.app/" }];
+{ title: "V2LMlbb", description: "V2LMlbb tool", href: "https://website-replica--hunterzeno88.replit.app/" },
+{ title: "All in One Tools", description: "All-in-one social media downloader", href: "https://all-social-media-downloader-seven.vercel.app/" }];
 
 
 const downloaders = [
@@ -26,6 +28,7 @@ const downloaders = [
 
 
 const Index = () => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
@@ -71,18 +74,15 @@ const Index = () => {
 
             {/* Shop */}
             <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
-              <a
-                href="https://sociabuzz.com/zenoshin1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group active:scale-[0.98]">
+              <button
+                onClick={() => { setMenuOpen(false); navigate("/shop"); }}
+                className="w-full flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group active:scale-[0.98]">
                 <ShoppingBag className="w-5 h-5 text-primary" />
-                <div className="min-w-0">
+                <div className="min-w-0 text-left">
                   <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Shop</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">Visit my store</p>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 ml-auto" />
-              </a>
+              </button>
             </div>
           
             {/* Tools */}
@@ -158,13 +158,14 @@ const Index = () => {
 
         {/* YouTube Music Player */}
         <div className="animate-fade-up" style={{ animationDelay: "0.55s" }}>
-          <iframe
+        <iframe
             style={{ borderRadius: "12px" }}
-            src="https://music.youtube.com/embed/nyuo9-OjNNg"
+            src="https://www.youtube.com/embed/nyuo9-OjNNg?autoplay=0"
             width="100%"
-            height="80"
+            height="152"
             frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+            allowFullScreen
             loading="lazy"
             title="Arctic Monkeys - I Wanna Be Yours"
           />
