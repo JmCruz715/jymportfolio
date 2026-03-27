@@ -159,13 +159,14 @@ const Index = () => {
 
         {/* YouTube Music Player */}
         <div className="animate-fade-up" style={{ animationDelay: "0.55s" }}>
-          <iframe
+        <iframe
             style={{ borderRadius: "12px" }}
-            src="https://music.youtube.com/embed/nyuo9-OjNNg"
+            src="https://www.youtube.com/embed/nyuo9-OjNNg?autoplay=0"
             width="100%"
-            height="80"
+            height="152"
             frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+            allowFullScreen
             loading="lazy"
             title="Arctic Monkeys - I Wanna Be Yours"
           />
