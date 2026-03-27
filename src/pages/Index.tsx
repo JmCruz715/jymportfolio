@@ -74,18 +74,15 @@ const Index = () => {
 
             {/* Shop */}
             <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
-              <a
-                href="https://sociabuzz.com/zenoshin1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group active:scale-[0.98]">
+              <button
+                onClick={() => { setMenuOpen(false); navigate("/shop"); }}
+                className="w-full flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group active:scale-[0.98]">
                 <ShoppingBag className="w-5 h-5 text-primary" />
-                <div className="min-w-0">
+                <div className="min-w-0 text-left">
                   <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Shop</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">Visit my store</p>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 ml-auto" />
-              </a>
+              </button>
             </div>
           
             {/* Tools */}
