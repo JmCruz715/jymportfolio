@@ -4,13 +4,15 @@ const ProfileCard = () =>
 <div className="flex flex-col items-center gap-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
     {/* Avatar */}
     <div className="relative animate-float">
-      <div className="w-28 h-28 rounded-full p-[3px] bg-gradient-to-br from-primary to-pink-400 animate-pulse-glow">
+      <div className="w-28 h-28 rounded-full p-[3px] bg-gradient-to-br from-primary to-pink-400">
         <img
           alt="Siegfried Samá"
           className="w-full h-full rounded-full object-cover bg-card"
           src="/lovable-uploads/f77014f9-190b-49ff-902d-3d1981b8391e.jpg"
         />
       </div>
+      {/* Online indicator */}
+      <span className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-green-500 border-2 border-background" />
     </div>
 
     {/* Name & Role */}
