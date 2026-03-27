@@ -28,6 +28,7 @@ const downloaders = [
 
 
 const Index = () => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
