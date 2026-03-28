@@ -182,8 +182,6 @@ const Index = () => {
         {/* Battery */}
         <BatteryIndicator />
 
-        {/* Visitor Counter */}
-        <VisitorCounter />
 
         {/* Background Music */}
         <audio autoPlay loop src="/audio/I_Wanna_Be_Yours.mp3" />
