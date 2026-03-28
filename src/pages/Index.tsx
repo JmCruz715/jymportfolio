@@ -7,6 +7,7 @@ import StatsRow from "@/components/StatsRow";
 import LiveClock from "@/components/LiveClock";
 import BatteryIndicator from "@/components/BatteryIndicator";
 import LinkSection from "@/components/LinkSection";
+import VisitorCounter from "@/components/VisitorCounter";
 
 const tools = [
   { title: "Auto Share", description: "Spam share tool", href: "https://mysteriousq-autoshare.onrender.com/" },
