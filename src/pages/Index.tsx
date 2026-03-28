@@ -63,8 +63,8 @@ const Index = () => {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="text-foreground hover:text-muted-foreground transition-colors active:scale-95">
-          
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
         </div>
       </div>
 
