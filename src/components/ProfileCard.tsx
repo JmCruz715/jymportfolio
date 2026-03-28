@@ -14,28 +14,32 @@ const ProfileCard = () => {
   const [displayText, setDisplayText] = useState("");
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  const currentPhrase = phrases[phraseIndex];
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        if (charIndex < fullText.length) {
-          setDisplayText(fullText.slice(0, charIndex + 1));
+        if (charIndex < currentPhrase.text.length) {
+          setDisplayText(currentPhrase.text.slice(0, charIndex + 1));
           setCharIndex(charIndex + 1);
         } else {
           setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
         if (charIndex > 0) {
-          setDisplayText(fullText.slice(0, charIndex - 1));
+          setDisplayText(currentPhrase.text.slice(0, charIndex - 1));
           setCharIndex(charIndex - 1);
         } else {
           setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % phrases.length);
         }
       }
     }, isDeleting ? 50 : 100);
 
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting]);
+  }, [charIndex, isDeleting, currentPhrase]);
 
   return (
     <div className="flex flex-col items-center gap-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
