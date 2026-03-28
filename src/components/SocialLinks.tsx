@@ -1,9 +1,10 @@
-import { Facebook, Instagram, Github } from "lucide-react";
+import { Facebook, Instagram, Github, MessageCircle } from "lucide-react";
 
 const socials = [
   { icon: Facebook, href: "https://www.facebook.com/jm.born67", label: "Facebook" },
   { icon: Instagram, href: "https://www.instagram.com/zenoshin11/", label: "Instagram" },
   { icon: Github, href: "https://github.com/JmCruz715", label: "GitHub" },
+  { icon: MessageCircle, href: "https://m.me/jm.born67", label: "Messenger" },
 ];
 
 const SocialLinks = () => (
