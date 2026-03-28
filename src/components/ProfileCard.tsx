@@ -65,7 +65,7 @@ const ProfileCard = () => {
           </span>
         </h1>
         <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mt-1.5">Developer</p>
-        <p className="text-sm text-muted-foreground mt-2 h-6">
+        <p className={`text-sm mt-2 h-6 ${currentPhrase.color}`}>
           {displayText}
           <span className="inline-block w-[2px] h-4 bg-primary ml-0.5 animate-pulse align-middle" />
         </p>
