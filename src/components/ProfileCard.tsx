@@ -1,34 +1,45 @@
 import { Check } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const fullText = "Stay consistent.";
+const phrases = [
+  { text: "Stay consistent.", color: "text-primary" },
+  { text: "Protect your energy.", color: "text-green-400" },
+  { text: "Mahalin moko.", color: "text-pink-400" },
+  { text: "Focus on your life.", color: "text-yellow-400" },
+  { text: "Never beg someone to love you.", color: "text-red-400" },
+  { text: "pinaka pogi sa balat ng lupa.", color: "text-cyan-400" },
+];
 
 const ProfileCard = () => {
   const [displayText, setDisplayText] = useState("");
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  const currentPhrase = phrases[phraseIndex];
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        if (charIndex < fullText.length) {
-          setDisplayText(fullText.slice(0, charIndex + 1));
+        if (charIndex < currentPhrase.text.length) {
+          setDisplayText(currentPhrase.text.slice(0, charIndex + 1));
           setCharIndex(charIndex + 1);
         } else {
           setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
         if (charIndex > 0) {
-          setDisplayText(fullText.slice(0, charIndex - 1));
+          setDisplayText(currentPhrase.text.slice(0, charIndex - 1));
           setCharIndex(charIndex - 1);
         } else {
           setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % phrases.length);
         }
       }
     }, isDeleting ? 50 : 100);
 
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting]);
+  }, [charIndex, isDeleting, currentPhrase]);
 
   return (
     <div className="flex flex-col items-center gap-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
@@ -54,7 +65,7 @@ const ProfileCard = () => {
           </span>
         </h1>
         <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mt-1.5">Developer</p>
-        <p className="text-sm text-muted-foreground mt-2 h-6">
+        <p className={`text-sm mt-2 h-6 ${currentPhrase.color}`}>
           {displayText}
           <span className="inline-block w-[2px] h-4 bg-primary ml-0.5 animate-pulse align-middle" />
         </p>
