@@ -12,13 +12,11 @@ const VisitorCounter = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-2 animate-fade-up" style={{ animationDelay: "0.55s" }}>
-      <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary/50">
-        <Eye className="w-4 h-4 text-muted-foreground" />
-        <span className="text-xs font-mono text-muted-foreground">
-          {count.toLocaleString()} visits
-        </span>
-      </div>
+    <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-secondary/50">
+      <Eye className="w-3.5 h-3.5 text-muted-foreground" />
+      <span className="text-[10px] font-mono text-muted-foreground">
+        {count.toLocaleString()} visits
+      </span>
     </div>
   );
 };

@@ -52,7 +52,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       {/* Top bar */}
-      <div className="fixed top-0 right-0 p-4 flex items-center gap-3 z-30 animate-fade-in">
+      <div className="fixed top-0 left-0 right-0 p-4 flex items-center justify-between z-30 animate-fade-in">
+        <VisitorCounter />
+        <div className="flex items-center gap-3">
         <button
           onClick={() => setIsDark(!isDark)}
           className="text-accent hover:text-accent/80 transition-colors active:scale-95">
@@ -61,9 +63,9 @@ const Index = () => {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="text-foreground hover:text-muted-foreground transition-colors active:scale-95">
-          
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
+        </div>
       </div>
 
       {/* Slide-out menu */}
@@ -180,8 +182,6 @@ const Index = () => {
         {/* Battery */}
         <BatteryIndicator />
 
-        {/* Visitor Counter */}
-        <VisitorCounter />
 
         {/* Background Music */}
         <audio autoPlay loop src="/audio/I_Wanna_Be_Yours.mp3" />
