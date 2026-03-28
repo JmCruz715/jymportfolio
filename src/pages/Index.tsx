@@ -7,15 +7,17 @@ import StatsRow from "@/components/StatsRow";
 import LiveClock from "@/components/LiveClock";
 import BatteryIndicator from "@/components/BatteryIndicator";
 import LinkSection from "@/components/LinkSection";
+import VisitorCounter from "@/components/VisitorCounter";
 
 const tools = [
-{ title: "Auto Share", description: "Spam share tool", href: "https://mysteriousq-autoshare.onrender.com/" },
-{ title: "Get Cookie Token", description: "Tutorial how to get cookie", href: "https://mysteriousq-get-cookie.onrender.com/" },
-{ title: "SMS Bomber", description: "Spam any PH number", href: "https://mysteriousq-sms-bomber.onrender.com/" },
-{ title: "TempMail", description: "Generate temporary email", href: "https://mysteriousq-tempmail.onrender.com/" },
-{ title: "Website Screenshot", description: "Capture any website", href: "https://mysteriousq-website-screenshot.onrender.com/" },
-{ title: "V2LMlbb", description: "V2LMlbb tool", href: "https://website-replica--hunterzeno88.replit.app/" },
-{ title: "All in One Tools", description: "All-in-one social media downloader", href: "https://all-social-media-downloader-seven.vercel.app/" }];
+  { title: "Auto Share", description: "Spam share tool", href: "https://mysteriousq-autoshare.onrender.com/" },
+  { title: "Get Cookie Token", description: "Tutorial how to get cookie", href: "https://mysteriousq-get-cookie.onrender.com/" },
+  { title: "SMS Bomber", description: "Spam any PH number", href: "https://mysteriousq-sms-bomber.onrender.com/" },
+  { title: "TempMail", description: "Generate temporary email", href: "https://mysteriousq-tempmail.onrender.com/" },
+  { title: "Website Screenshot", description: "Capture any website", href: "https://mysteriousq-website-screenshot.onrender.com/" },
+  { title: "V2LMlbb", description: "V2LMlbb tool", href: "https://website-replica--hunterzeno88.replit.app/" },
+  { title: "All in One Tools", description: "All-in-one social media downloader", href: "https://all-social-media-downloader-seven.vercel.app/" },
+];
 
 
 const downloaders = [
@@ -134,6 +136,28 @@ const Index = () => {
               )}
               </div>
             </div>
+
+            {/* Premium Tools */}
+            <div className="animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "backwards" }}>
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-3 flex items-center gap-2">
+                <span>⭐</span> Premium Tools
+                <span className="text-[10px] bg-primary/20 text-primary font-mono px-1.5 py-0.5 rounded">1</span>
+              </p>
+              <div className="flex flex-col gap-2">
+                <a
+                  href="https://animehaven-next.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group active:scale-[0.98]"
+                >
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold text-foreground uppercase tracking-wide">AnimeHaven</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">Premium anime streaming</p>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       }
@@ -155,6 +179,9 @@ const Index = () => {
 
         {/* Battery */}
         <BatteryIndicator />
+
+        {/* Visitor Counter */}
+        <VisitorCounter />
 
         {/* Background Music */}
         <audio autoPlay loop src="/audio/I_Wanna_Be_Yours.mp3" />
