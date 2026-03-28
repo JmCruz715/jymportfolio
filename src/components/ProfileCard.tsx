@@ -1,7 +1,14 @@
 import { Check } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const fullText = "Stay consistent.";
+const phrases = [
+  { text: "Stay consistent.", color: "text-primary" },
+  { text: "Protect your energy.", color: "text-green-400" },
+  { text: "Mahalin moko.", color: "text-pink-400" },
+  { text: "Focus on your life.", color: "text-yellow-400" },
+  { text: "Never beg someone to love you.", color: "text-red-400" },
+  { text: "pinaka pogi sa balat ng lupa.", color: "text-cyan-400" },
+];
 
 const ProfileCard = () => {
   const [displayText, setDisplayText] = useState("");
