@@ -89,77 +89,29 @@ const Index = () => {
               </button>
             </div>
           
-            {/* Tools */}
-            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-3 flex items-center gap-2">
-                <span>🛠️</span> Tools
-                <span className="text-[10px] bg-primary/20 text-primary font-mono px-1.5 py-0.5 rounded">{tools.length}</span>
-              </p>
-              <div className="flex flex-col gap-2">
-                {tools.map((t) =>
-              <a
-                key={t.title}
-                href={t.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group active:scale-[0.98]">
-                
-                    <div className="min-w-0">
-                      <p className="text-xs font-semibold text-foreground uppercase tracking-wide">{t.title}</p>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">{t.description}</p>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-                  </a>
-              )}
-              </div>
-            </div>
+            <MenuSection
+              title="Tools"
+              emoji="🛠️"
+              count={tools.length}
+              links={tools}
+              delay="0.2s"
+            />
 
-            {/* Downloaders */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "backwards" }}>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-3 flex items-center gap-2">
-                <span>⬇️</span> Downloader
-                <span className="text-[10px] bg-primary/20 text-primary font-mono px-1.5 py-0.5 rounded">{downloaders.length}</span>
-              </p>
-              <div className="flex flex-col gap-2">
-                {downloaders.map((d) =>
-              <a
-                key={d.title}
-                href={d.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group active:scale-[0.98]">
-                
-                    <div className="min-w-0">
-                      <p className="text-xs font-semibold text-foreground uppercase tracking-wide">{d.title}</p>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">{d.description}</p>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-                  </a>
-              )}
-              </div>
-            </div>
+            <MenuSection
+              title="Downloader"
+              emoji="⬇️"
+              count={downloaders.length}
+              links={downloaders}
+              delay="0.3s"
+            />
 
-            {/* Premium Tools */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "backwards" }}>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-3 flex items-center gap-2">
-                <span>⭐</span> Premium Tools
-                <span className="text-[10px] bg-primary/20 text-primary font-mono px-1.5 py-0.5 rounded">1</span>
-              </p>
-              <div className="flex flex-col gap-2">
-                <a
-                  href="https://animehaven-next.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group active:scale-[0.98]"
-                >
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-foreground uppercase tracking-wide">AnimeHaven</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">Premium anime streaming</p>
-                  </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-                </a>
-              </div>
-            </div>
+            <MenuSection
+              title="Premium Tools"
+              emoji="⭐"
+              count={1}
+              links={[{ title: "AnimeHaven", description: "Premium anime streaming", href: "https://animehaven-next.vercel.app/" }]}
+              delay="0.4s"
+            />
           </div>
         </div>
       }
