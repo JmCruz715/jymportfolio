@@ -76,6 +76,19 @@ const accounts = [
     price: 1100,
     image: account5,
   },
+  {
+    id: 6,
+    name: "Say yes to me",
+    gameId: "504996182",
+    server: "3362",
+    rank: "Mythic",
+    matches: 10042,
+    likes: 5296,
+    heroes: 108,
+    skins: 266,
+    price: 600,
+    image: account6,
+  },
 ];
 
 const coffeeItems = [
