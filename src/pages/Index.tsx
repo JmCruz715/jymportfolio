@@ -6,7 +6,7 @@ import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
 import LiveClock from "@/components/LiveClock";
 import BatteryIndicator from "@/components/BatteryIndicator";
-import LinkSection from "@/components/LinkSection";
+import MenuSection from "@/components/MenuSection";
 import VisitorCounter from "@/components/VisitorCounter";
 
 const tools = [
