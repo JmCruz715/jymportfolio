@@ -86,7 +86,7 @@ const accounts = [
     likes: 5296,
     heroes: 108,
     skins: 266,
-    price: 600,
+    price: 1100,
     image: account6,
   },
 ];
