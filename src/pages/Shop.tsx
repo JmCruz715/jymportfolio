@@ -6,6 +6,7 @@ import account2 from "@/assets/account2.jpg";
 import account3 from "@/assets/account3.jpg";
 import account4 from "@/assets/account4.jpg";
 import account5 from "@/assets/account5.jpg";
+import account6 from "@/assets/account6.jpg";
 import coffeeMenu from "@/assets/coffee-menu.jpg";
 import fingersleeveImg from "@/assets/fingersleeve.jpeg";
 
