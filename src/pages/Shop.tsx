@@ -6,6 +6,7 @@ import account2 from "@/assets/account2.jpg";
 import account3 from "@/assets/account3.jpg";
 import account4 from "@/assets/account4.jpg";
 import account5 from "@/assets/account5.jpg";
+import account6 from "@/assets/account6.jpg";
 import coffeeMenu from "@/assets/coffee-menu.jpg";
 import fingersleeveImg from "@/assets/fingersleeve.jpeg";
 
@@ -74,6 +75,19 @@ const accounts = [
     skins: 379,
     price: 1100,
     image: account5,
+  },
+  {
+    id: 6,
+    name: "Say yes to me",
+    gameId: "504996182",
+    server: "3362",
+    rank: "Mythic",
+    matches: 10042,
+    likes: 5296,
+    heroes: 108,
+    skins: 266,
+    price: 600,
+    image: account6,
   },
 ];
 

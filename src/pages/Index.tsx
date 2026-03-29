@@ -106,10 +106,13 @@ const Index = () => {
             />
 
             <MenuSection
-              title="Premium Tools"
-              emoji="⭐"
-              count={1}
-              links={[{ title: "AnimeHaven", description: "Premium anime streaming", href: "https://animehaven-next.vercel.app/" }]}
+              title="Anime/Manga"
+              emoji="🎌"
+              count={2}
+              links={[
+                { title: "AnimeHaven", description: "Premium anime streaming", href: "https://animehaven-next.vercel.app/" },
+                { title: "GlobalComix Manga", description: "Browse manga online", href: "https://globalcomix.com/browse/manga" },
+              ]}
               delay="0.4s"
             />
           </div>
