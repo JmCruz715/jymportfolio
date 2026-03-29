@@ -78,13 +78,13 @@ const accounts = [
 ];
 
 const coffeeItems = [
-  { name: "Black White Coffee", price: 40 },
-  { name: "Coffee Cocoa", price: 60 },
-  { name: "Cappuccino", price: 65 },
-  { name: "Orange Americano", price: 65 },
-  { name: "Caramel Macchiato", price: 75 },
-  { name: "Coffee White Cream", price: 80 },
-  { name: "Latte", price: 80 },
+  { name: "Black White Coffee", price: 40, tag: "Classic" },
+  { name: "Coffee Cocoa", price: 60, tag: "Popular" },
+  { name: "Cappuccino", price: 65, tag: "Best Seller" },
+  { name: "Orange Americano", price: 65, tag: "New" },
+  { name: "Caramel Macchiato", price: 75, tag: "Premium" },
+  { name: "Coffee White Cream", price: 80, tag: "Special" },
+  { name: "Latte", price: 80, tag: "Classic" },
 ];
 
 type ShopTab = "mlbb" | "coffee" | "fingersleeve";
@@ -218,21 +218,39 @@ const Shop = () => {
 
         {/* Coffee Shop */}
         {activeTab === "coffee" && (
-          <div className="flex flex-col gap-4 animate-fade-up">
-            <img
-              src={coffeeMenu}
-              alt="Coffee Menu"
-              className="w-full rounded-xl"
-            />
-            <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-5 animate-fade-up">
+            {/* Menu banner */}
+            <div className="relative rounded-xl overflow-hidden animate-scale-in">
+              <img
+                src={coffeeMenu}
+                alt="Coffee Menu"
+                className="w-full"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              <div className="absolute bottom-3 left-4">
+                <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <Coffee className="w-5 h-5 text-primary" /> Our Menu
+                </h2>
+                <p className="text-[10px] text-muted-foreground">Freshly brewed with love</p>
+              </div>
+            </div>
+
+            {/* Coffee items */}
+            <div className="flex flex-col gap-2.5">
               {coffeeItems.map((item, i) => (
                 <div
                   key={item.name}
-                  className="card-surface rounded-xl p-4 flex items-center justify-between animate-fade-up"
-                  style={{ animationDelay: `${0.1 + i * 0.06}s`, animationFillMode: "backwards" }}
+                  className="card-surface rounded-xl p-4 flex items-center justify-between animate-slide-in-left group hover:border-primary/30 transition-all duration-300"
+                  style={{ animationDelay: `${0.1 + i * 0.07}s`, animationFillMode: "backwards" }}
                 >
-                  <div>
-                    <h3 className="text-sm font-bold text-foreground">{item.name}</h3>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                      <Coffee className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-foreground">{item.name}</h3>
+                      <span className="text-[9px] font-semibold uppercase tracking-wider text-accent">{item.tag}</span>
+                    </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-lg font-bold text-primary">₱{item.price}</span>

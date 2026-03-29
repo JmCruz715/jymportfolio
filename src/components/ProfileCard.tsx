@@ -43,10 +43,10 @@ const ProfileCard = () => {
   }, [charIndex, isDeleting, currentPhrase]);
 
   return (
-    <div className="flex flex-col items-center gap-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
+    <div className="flex flex-col items-center gap-4 animate-scale-in" style={{ animationDelay: "0.15s" }}>
       {/* Avatar with animation */}
       <div
-        className="relative cursor-pointer"
+        className="relative cursor-pointer animate-float"
         onMouseEnter={() => setAvatarHover(true)}
         onMouseLeave={() => setAvatarHover(false)}
       >

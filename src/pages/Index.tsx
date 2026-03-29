@@ -123,16 +123,24 @@ const Index = () => {
         <ProfileCard />
 
         {/* Social links */}
-        <SocialLinks />
+        <div className="animate-fade-up" style={{ animationDelay: "0.25s" }}>
+          <SocialLinks />
+        </div>
 
         {/* Stats */}
-        <StatsRow />
+        <div className="animate-fade-up" style={{ animationDelay: "0.35s" }}>
+          <StatsRow />
+        </div>
 
         {/* Clock */}
-        <LiveClock />
+        <div className="animate-slide-in-left" style={{ animationDelay: "0.45s" }}>
+          <LiveClock />
+        </div>
 
         {/* Battery */}
-        <BatteryIndicator />
+        <div className="animate-slide-in-left" style={{ animationDelay: "0.55s" }}>
+          <BatteryIndicator />
+        </div>
 
 
         {/* Background Music */}
