@@ -78,13 +78,13 @@ const accounts = [
 ];
 
 const coffeeItems = [
-  { name: "Black White Coffee", price: 40 },
-  { name: "Coffee Cocoa", price: 60 },
-  { name: "Cappuccino", price: 65 },
-  { name: "Orange Americano", price: 65 },
-  { name: "Caramel Macchiato", price: 75 },
-  { name: "Coffee White Cream", price: 80 },
-  { name: "Latte", price: 80 },
+  { name: "Black White Coffee", price: 40, tag: "Classic" },
+  { name: "Coffee Cocoa", price: 60, tag: "Popular" },
+  { name: "Cappuccino", price: 65, tag: "Best Seller" },
+  { name: "Orange Americano", price: 65, tag: "New" },
+  { name: "Caramel Macchiato", price: 75, tag: "Premium" },
+  { name: "Coffee White Cream", price: 80, tag: "Special" },
+  { name: "Latte", price: 80, tag: "Classic" },
 ];
 
 type ShopTab = "mlbb" | "coffee" | "fingersleeve";
