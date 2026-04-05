@@ -152,39 +152,41 @@ const Index = () => {
       <main className="max-w-md mx-auto px-5 py-20 flex flex-col gap-8">
 
         {/* Profile */}
-        <ProfileCard />
+        <ScrollReveal>
+          <ProfileCard />
+        </ScrollReveal>
 
         {/* Social links */}
-        <div className="animate-fade-up" style={{ animationDelay: "0.25s" }}>
+        <ScrollReveal delay="0.1s">
           <SocialLinks />
-        </div>
+        </ScrollReveal>
 
         {/* Stats */}
-        <div className="animate-fade-up" style={{ animationDelay: "0.35s" }}>
+        <ScrollReveal delay="0.15s">
           <StatsRow />
-        </div>
+        </ScrollReveal>
 
         {/* Clock */}
-        <div className="animate-slide-in-left" style={{ animationDelay: "0.45s" }}>
+        <ScrollReveal delay="0.1s">
           <LiveClock />
-        </div>
+        </ScrollReveal>
 
         {/* Battery */}
-        <div className="animate-slide-in-left" style={{ animationDelay: "0.55s" }}>
+        <ScrollReveal delay="0.15s">
           <BatteryIndicator />
-        </div>
-
+        </ScrollReveal>
 
         {/* Background Music */}
         <audio autoPlay loop src="/audio/I_Wanna_Be_Yours.mp3" />
 
         {/* Footer */}
-        <footer className="text-center animate-fade-up" style={{ animationDelay: "0.6s" }}>
-          <p className="text-xs text-muted-foreground">
-            © 2026 | Developed by: <span className="text-primary">​jmcruz
- </span>
-          </p>
-        </footer>
+        <ScrollReveal delay="0.2s">
+          <footer className="text-center">
+            <p className="text-xs text-muted-foreground">
+              © 2026 | Developed by: <span className="text-primary">​jmcruz</span>
+            </p>
+          </footer>
+        </ScrollReveal>
       </main>
     </div>);
 };
