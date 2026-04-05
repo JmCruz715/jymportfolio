@@ -164,27 +164,27 @@ const Index = () => {
       <main className="max-w-md mx-auto px-5 py-20 flex flex-col gap-8">
 
         {/* Profile */}
-        <ScrollReveal>
+        <ScrollReveal variant="scale">
           <ProfileCard />
         </ScrollReveal>
 
         {/* Social links */}
-        <ScrollReveal delay="0.1s">
+        <ScrollReveal delay="0.1s" variant="zoom-rotate">
           <SocialLinks />
         </ScrollReveal>
 
         {/* Stats */}
-        <ScrollReveal delay="0.15s">
+        <ScrollReveal delay="0.15s" variant="slide-left">
           <StatsRow />
         </ScrollReveal>
 
         {/* Clock */}
-        <ScrollReveal delay="0.1s">
+        <ScrollReveal delay="0.1s" variant="slide-right">
           <LiveClock />
         </ScrollReveal>
 
         {/* Battery */}
-        <ScrollReveal delay="0.15s">
+        <ScrollReveal delay="0.15s" variant="slide-left">
           <BatteryIndicator />
         </ScrollReveal>
 
@@ -192,7 +192,7 @@ const Index = () => {
         <audio autoPlay loop src="/audio/I_Wanna_Be_Yours.mp3" />
 
         {/* Footer */}
-        <ScrollReveal delay="0.2s">
+        <ScrollReveal delay="0.2s" variant="fade-up">
           <footer className="text-center">
             <p className="text-xs text-muted-foreground">
               © 2026 | Developed by: <span className="text-primary">​jmcruz</span>
