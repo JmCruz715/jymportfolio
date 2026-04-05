@@ -29,6 +29,35 @@ const downloaders = [
 { title: "X Downloader", description: "Download video from Twitter", href: "https://mysteriousq-xdownloader.onrender.com/" }];
 
 
+const useScrollReveal = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+};
+
+const ScrollReveal = ({ children, className = "", delay = "0s" }: { children: React.ReactNode; className?: string; delay?: string }) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: delay }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const Index = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
