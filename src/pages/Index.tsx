@@ -45,12 +45,24 @@ const useScrollReveal = () => {
   return { ref, isVisible };
 };
 
-const ScrollReveal = ({ children, className = "", delay = "0s" }: { children: React.ReactNode; className?: string; delay?: string }) => {
+type RevealVariant = "fade-up" | "slide-left" | "slide-right" | "scale" | "flip" | "zoom-rotate";
+
+const variantStyles: Record<RevealVariant, { hidden: string; visible: string }> = {
+  "fade-up": { hidden: "opacity-0 translate-y-8", visible: "opacity-100 translate-y-0" },
+  "slide-left": { hidden: "opacity-0 -translate-x-12", visible: "opacity-100 translate-x-0" },
+  "slide-right": { hidden: "opacity-0 translate-x-12", visible: "opacity-100 translate-x-0" },
+  "scale": { hidden: "opacity-0 scale-75", visible: "opacity-100 scale-100" },
+  "flip": { hidden: "opacity-0 rotate-x-90", visible: "opacity-100 rotate-x-0" },
+  "zoom-rotate": { hidden: "opacity-0 scale-50 -rotate-6", visible: "opacity-100 scale-100 rotate-0" },
+};
+
+const ScrollReveal = ({ children, className = "", delay = "0s", variant = "fade-up" }: { children: React.ReactNode; className?: string; delay?: string; variant?: RevealVariant }) => {
   const { ref, isVisible } = useScrollReveal();
+  const styles = variantStyles[variant];
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${isVisible ? styles.visible : styles.hidden} ${className}`}
       style={{ transitionDelay: delay }}
     >
       {children}
