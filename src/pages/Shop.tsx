@@ -124,6 +124,7 @@ const Shop = () => {
   }, [isDark]);
 
   const messengerUrl = "https://m.me/jm.born67";
+  const buildMessengerLink = (label: string, price: number) => `${messengerUrl}?ref=${encodeURIComponent(`Hi jmcruz, I want to buy ${label} for ₱${price}.`)}`;
 
   const tabs: { key: ShopTab; label: string; icon: React.ReactNode }[] = [
     { key: "mlbb", label: "MLBB Account", icon: <Gamepad2 className="w-4 h-4" /> },
@@ -216,9 +217,7 @@ const Shop = () => {
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-bold text-primary">₱{account.price.toLocaleString()}</span>
                     <a
-                      href={messengerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={buildMessengerLink(account.name, account.price)}
                       className="liquid-button liquid-button-primary px-4 py-2 text-xs"
                     >
                       Buy Now
@@ -268,12 +267,10 @@ const Shop = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-lg font-bold text-primary">₱{item.price}</span>
-                     <a
-                      href={messengerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                       className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
-                    >
+                      <a
+                       href={buildMessengerLink(item.name, item.price)}
+                        className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
+                     >
                       Order
                     </a>
                   </div>
@@ -305,12 +302,10 @@ const Shop = () => {
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-lg font-bold text-primary">₱50</span>
-                       <a
-                        href={messengerUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                         className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
-                      >
+                        <a
+                         href={buildMessengerLink("Gaming Fingersleeve 1 Pair", 50)}
+                          className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
+                       >
                         Buy
                       </a>
                     </div>
@@ -322,12 +317,10 @@ const Shop = () => {
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-lg font-bold text-primary">₱80</span>
-                       <a
-                        href={messengerUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                         className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
-                      >
+                        <a
+                         href={buildMessengerLink("Gaming Fingersleeve Buy 1 Take 1", 80)}
+                          className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
+                       >
                         Buy
                       </a>
                     </div>

@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, Menu, X, ShoppingBag, Download } from "lucide-react";
+import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
 import LiveClock from "@/components/LiveClock";
 import BatteryIndicator from "@/components/BatteryIndicator";
 import MenuSection from "@/components/MenuSection";
-import VisitorCounter from "@/components/VisitorCounter";
 
 const tools = [
   { title: "Auto Share", description: "Spam share tool", href: "https://mysteriousq-autoshare.onrender.com/" },
@@ -92,8 +91,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       {/* Top bar */}
-      <div className="fixed top-0 left-0 right-0 p-4 flex items-center justify-between z-30 animate-fade-in">
-        <VisitorCounter />
+      <div className="fixed top-0 left-0 right-0 p-4 flex items-center justify-end z-30 animate-fade-in">
         <div className="flex items-center gap-3">
         <button
           onClick={() => setIsDark(!isDark)}
@@ -168,6 +166,18 @@ const Index = () => {
               ]}
               delay="0.4s"
             />
+
+            <div className="mt-6 animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "backwards" }}>
+              <div className="liquid-panel px-4 py-4">
+                <div className="mb-2 flex items-center gap-2 text-primary">
+                  <Sparkles className="h-4 w-4" />
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em]">About</p>
+                </div>
+                <p className="text-xs leading-6 text-muted-foreground">
+                  jmcruz builds clean tools, curated links, shop drops, and anime picks in one smooth liquid-glass space.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       }
