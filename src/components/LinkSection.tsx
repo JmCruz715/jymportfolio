@@ -17,7 +17,7 @@ const LinkSection = ({ title, count, emoji, links, defaultOpen = false }: LinkSe
     <div className="animate-fade-up" style={{ animationDelay: "0.55s" }}>
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-1 py-2 group"
+        className="liquid-button w-full justify-between px-3 py-3 group"
       >
         <div className="flex items-center gap-2">
           <span className="text-base">{emoji}</span>

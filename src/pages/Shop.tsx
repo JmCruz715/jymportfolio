@@ -137,14 +137,14 @@ const Shop = () => {
       <div className="fixed top-0 left-0 right-0 p-4 flex items-center justify-between z-30 bg-background/80 backdrop-blur-sm animate-fade-in">
         <button
           onClick={() => navigate("/")}
-          className="text-foreground hover:text-muted-foreground transition-colors active:scale-95 flex items-center gap-2"
+          className="liquid-button gap-2 px-4 py-2 text-sm"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="text-sm font-medium">Back</span>
         </button>
         <button
           onClick={() => setIsDark(!isDark)}
-          className="text-accent hover:text-accent/80 transition-colors active:scale-95"
+          className="liquid-icon-button"
         >
           {isDark ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
         </button>
@@ -161,14 +161,14 @@ const Shop = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 p-1 rounded-xl bg-secondary/50 animate-fade-up" style={{ animationDelay: "0.05s" }}>
+        <div className="liquid-panel flex gap-1 p-1 animate-fade-up" style={{ animationDelay: "0.05s" }}>
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
               className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-[10px] font-semibold uppercase tracking-wide transition-all duration-200 ${
                 activeTab === tab.key
-                  ? "bg-primary text-primary-foreground shadow-sm"
+                  ? "liquid-button-primary text-primary-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -219,7 +219,7 @@ const Shop = () => {
                       href={messengerUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-colors active:scale-95"
+                      className="liquid-button liquid-button-primary px-4 py-2 text-xs"
                     >
                       Buy Now
                     </a>
@@ -268,11 +268,11 @@ const Shop = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-lg font-bold text-primary">₱{item.price}</span>
-                    <a
+                     <a
                       href={messengerUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-colors active:scale-95"
+                       className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
                     >
                       Order
                     </a>
@@ -305,11 +305,11 @@ const Shop = () => {
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-lg font-bold text-primary">₱50</span>
-                      <a
+                       <a
                         href={messengerUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-colors active:scale-95"
+                         className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
                       >
                         Buy
                       </a>
@@ -322,11 +322,11 @@ const Shop = () => {
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-lg font-bold text-primary">₱80</span>
-                      <a
+                       <a
                         href={messengerUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-colors active:scale-95"
+                         className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
                       >
                         Buy
                       </a>
