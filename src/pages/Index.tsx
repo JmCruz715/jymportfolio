@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, Menu, X, ExternalLink, ShoppingBag } from "lucide-react";
+import { Moon, Sun, Menu, X, ShoppingBag, Download } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
@@ -23,7 +23,6 @@ const tools = [
 const downloaders = [
 { title: "Spotify Downloader", description: "Download music from Spotify", href: "https://mysteriousq-spotifydl.onrender.com/" },
 { title: "YouTube Downloader", description: "Download video from YouTube", href: "https://mysteriousq-ytdl.onrender.com/" },
-{ title: "Instagram Downloader", description: "Download video from Instagram", href: "https://mysteriousq-igdl.onrender.com/" },
 { title: "Facebook Downloader", description: "Download video from Facebook", href: "https://mysteriousq-fbdl.onrender.com/" },
 { title: "TikTok Downloader", description: "Download TikTok without watermark", href: "https://mysteriousq-tiktokdl.onrender.com/" },
 { title: "X Downloader", description: "Download video from Twitter", href: "https://mysteriousq-xdownloader.onrender.com/" }];
@@ -98,12 +97,12 @@ const Index = () => {
         <div className="flex items-center gap-3">
         <button
           onClick={() => setIsDark(!isDark)}
-          className="text-accent hover:text-accent/80 transition-colors active:scale-95">
+          className="liquid-icon-button">
           {isDark ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
         </button>
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-foreground hover:text-muted-foreground transition-colors active:scale-95">
+          className="liquid-icon-button">
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
         </div>
@@ -114,18 +113,31 @@ const Index = () => {
       <div className="fixed inset-0 z-20 animate-fade-in" onClick={() => setMenuOpen(false)}>
           <div className="absolute inset-0 bg-background/60 backdrop-blur-sm transition-opacity duration-300" />
           <div
-          className="absolute right-0 top-0 h-full w-72 bg-card border-l border-border p-6 pt-16 overflow-y-auto animate-slide-in-right"
+          className="absolute right-0 top-0 h-full w-72 liquid-panel rounded-none border-l p-6 pt-16 overflow-y-auto animate-slide-in-right"
           onClick={(e) => e.stopPropagation()}>
 
             {/* Shop */}
             <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
               <button
                 onClick={() => { setMenuOpen(false); navigate("/shop"); }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group active:scale-[0.98]">
+                className="liquid-button w-full justify-start gap-3 px-3 py-3 group">
                 <ShoppingBag className="w-5 h-5 text-primary" />
                 <div className="min-w-0 text-left">
                   <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Shop</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">Visit my store</p>
+                </div>
+              </button>
+            </div>
+
+            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.15s", animationFillMode: "backwards" }}>
+              <button
+                onClick={() => { setMenuOpen(false); navigate("/downloads"); }}
+                className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
+              >
+                <Download className="w-5 h-5 text-primary" />
+                <div className="min-w-0 text-left">
+                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Downloads</p>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">Open the APK apps page</p>
                 </div>
               </button>
             </div>
