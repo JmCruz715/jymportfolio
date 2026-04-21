@@ -50,7 +50,7 @@ const Payment = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <p className="text-foreground font-bold mb-2">Account not found</p>
-          <button onClick={() => navigate("/shop")} className="text-primary text-sm">
+          <button onClick={() => navigate("/shop")} className="liquid-button liquid-button-primary text-sm">
             Back to Shop
           </button>
         </div>
@@ -64,14 +64,14 @@ const Payment = () => {
       <div className="fixed top-0 left-0 right-0 p-4 flex items-center justify-between z-30 bg-background/80 backdrop-blur-sm animate-fade-in">
         <button
           onClick={() => navigate("/shop")}
-          className="text-foreground hover:text-muted-foreground transition-colors active:scale-95 flex items-center gap-2"
+          className="liquid-button gap-2 px-4 py-2 text-sm"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="text-sm font-medium">Back to Shop</span>
         </button>
         <button
           onClick={() => setIsDark(!isDark)}
-          className="text-accent hover:text-accent/80 transition-colors active:scale-95"
+          className="liquid-icon-button"
         >
           {isDark ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
         </button>
@@ -108,7 +108,7 @@ const Payment = () => {
             </div>
             <button
               onClick={handleCopy}
-              className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors active:scale-95"
+              className="liquid-icon-button h-10 w-10"
             >
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             </button>

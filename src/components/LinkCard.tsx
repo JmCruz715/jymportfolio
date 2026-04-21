@@ -11,7 +11,7 @@ const LinkCard = ({ title, description, href }: LinkCardProps) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="card-surface p-4 flex items-center justify-between gap-3 group hover:border-primary/40 transition-all duration-200 active:scale-[0.98]"
+    className="liquid-panel p-4 flex items-center justify-between gap-3 group hover:border-primary/40 transition-all duration-200 active:scale-[0.98]"
   >
     <div className="min-w-0">
       <p className="text-sm font-semibold text-foreground uppercase tracking-wide">{title}</p>

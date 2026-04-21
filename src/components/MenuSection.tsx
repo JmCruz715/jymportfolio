@@ -17,7 +17,7 @@ const MenuSection = ({ title, emoji, count, links, delay = "0.2s", defaultOpen =
     <div className="mb-4 animate-fade-in" style={{ animationDelay: delay, animationFillMode: "backwards" }}>
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-1 py-2 group"
+        className="liquid-button w-full justify-between px-3 py-3 group"
       >
         <div className="flex items-center gap-2">
           <span>{emoji}</span>
@@ -37,7 +37,7 @@ const MenuSection = ({ title, emoji, count, links, delay = "0.2s", defaultOpen =
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group active:scale-[0.98]"
+              className="liquid-button w-full justify-between gap-2 px-3 py-3 group"
             >
               <div className="min-w-0">
                 <p className="text-xs font-semibold text-foreground uppercase tracking-wide">{link.title}</p>
