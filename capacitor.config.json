@@ -1,0 +1,9 @@
+{
+  "appId": "app.lovable.741c66572f3043659d59b4f54f077978",
+  "appName": "jymportfolio",
+  "webDir": "dist",
+  "server": {
+    "url": "https://741c6657-2f30-4365-9d59-b4f54f077978.lovableproject.com?forceHideBadge=true",
+    "cleartext": true
+  }
+}
