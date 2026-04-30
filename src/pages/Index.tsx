@@ -217,6 +217,11 @@ const Index = () => {
           <SocialLinks />
         </ScrollReveal>
 
+        {/* Connected websites */}
+        <ScrollReveal delay="0.12s" variant="fade-up">
+          <WebsitesSection />
+        </ScrollReveal>
+
         {/* Stats */}
         <ScrollReveal delay="0.15s" variant="slide-left">
           <StatsRow />
@@ -232,14 +237,11 @@ const Index = () => {
           <BatteryIndicator />
         </ScrollReveal>
 
-        {/* Background Music */}
-        <audio autoPlay loop src="/audio/I_Wanna_Be_Yours.mp3" />
-
         {/* Footer */}
         <ScrollReveal delay="0.2s" variant="fade-up">
           <footer className="text-center">
             <p className="text-xs text-muted-foreground">
-              © 2026 | Developed by: <span className="text-primary">​jmcruz</span>
+              © 2026 | Developed by: <span className="text-primary">​{settings?.name ?? "jmcruz"}</span>
             </p>
           </footer>
         </ScrollReveal>
