@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles } from "lucide-react";
+import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles, Lock } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
 import LiveClock from "@/components/LiveClock";
 import BatteryIndicator from "@/components/BatteryIndicator";
 import MenuSection from "@/components/MenuSection";
+import MusicButton from "@/components/MusicButton";
+import WebsitesSection from "@/components/WebsitesSection";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const tools = [
   { title: "Auto Share", description: "Spam share tool", href: "https://mysteriousq-autoshare.onrender.com/" },
@@ -88,10 +91,16 @@ const Index = () => {
     }
   }, [isDark]);
 
+  const { settings } = useSiteSettings();
+
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Top bar */}
-      <div className="fixed top-0 left-0 right-0 p-4 flex items-center justify-end z-30 animate-fade-in">
+      {/* Top-left music button */}
+      <div className="fixed top-0 left-0 p-4 z-30 animate-fade-in">
+        <MusicButton />
+      </div>
+      {/* Top-right controls */}
+      <div className="fixed top-0 right-0 p-4 flex items-center justify-end z-30 animate-fade-in">
         <div className="flex items-center gap-3">
         <button
           onClick={() => setIsDark(!isDark)}
@@ -139,6 +148,19 @@ const Index = () => {
                 </div>
               </button>
             </div>
+
+            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.18s", animationFillMode: "backwards" }}>
+              <button
+                onClick={() => { setMenuOpen(false); navigate("/admin/login"); }}
+                className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
+              >
+                <Lock className="w-5 h-5 text-primary" />
+                <div className="min-w-0 text-left">
+                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Admin</p>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">Edit profile, links & bio</p>
+                </div>
+              </button>
+            </div>
           
             <MenuSection
               title="Tools"
@@ -174,7 +196,7 @@ const Index = () => {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.24em]">About</p>
                 </div>
                 <p className="text-xs leading-6 text-muted-foreground">
-                  jmcruz builds clean tools, curated links, shop drops, and anime picks in one smooth liquid-glass space.
+                  {settings?.bio ?? "jmcruz builds clean tools, curated links, shop drops, and anime picks in one smooth liquid-glass space."}
                 </p>
               </div>
             </div>
@@ -195,6 +217,11 @@ const Index = () => {
           <SocialLinks />
         </ScrollReveal>
 
+        {/* Connected websites */}
+        <ScrollReveal delay="0.12s" variant="fade-up">
+          <WebsitesSection />
+        </ScrollReveal>
+
         {/* Stats */}
         <ScrollReveal delay="0.15s" variant="slide-left">
           <StatsRow />
@@ -210,14 +237,11 @@ const Index = () => {
           <BatteryIndicator />
         </ScrollReveal>
 
-        {/* Background Music */}
-        <audio autoPlay loop src="/audio/I_Wanna_Be_Yours.mp3" />
-
         {/* Footer */}
         <ScrollReveal delay="0.2s" variant="fade-up">
           <footer className="text-center">
             <p className="text-xs text-muted-foreground">
-              © 2026 | Developed by: <span className="text-primary">​jmcruz</span>
+              © 2026 | Developed by: <span className="text-primary">​{settings?.name ?? "jmcruz"}</span>
             </p>
           </footer>
         </ScrollReveal>

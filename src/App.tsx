@@ -3,10 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { MusicProvider } from "@/contexts/MusicContext";
 import Index from "./pages/Index.tsx";
 import Shop from "./pages/Shop.tsx";
 import Payment from "./pages/Payment.tsx";
 import DownloadApps from "./pages/DownloadApps.tsx";
+import AdminLogin from "./pages/AdminLogin.tsx";
+import AdminEditor from "./pages/AdminEditor.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -16,16 +19,20 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/downloads" element={<DownloadApps />} />
-          <Route path="/payment/:id" element={<Payment />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <MusicProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/downloads" element={<DownloadApps />} />
+            <Route path="/payment/:id" element={<Payment />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminEditor />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </MusicProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
