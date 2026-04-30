@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles } from "lucide-react";
+import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles, Lock } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
 import LiveClock from "@/components/LiveClock";
 import BatteryIndicator from "@/components/BatteryIndicator";
 import MenuSection from "@/components/MenuSection";
+import MusicButton from "@/components/MusicButton";
+import WebsitesSection from "@/components/WebsitesSection";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const tools = [
   { title: "Auto Share", description: "Spam share tool", href: "https://mysteriousq-autoshare.onrender.com/" },
