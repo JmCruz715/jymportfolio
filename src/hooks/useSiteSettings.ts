@@ -4,6 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 export type Phrase = { text: string; color: string };
 export type Social = { label: string; icon: string; href: string };
 export type WebsiteLink = { title: string; description: string; href: string };
+export type MenuLink = { title: string; description: string; href: string };
+export type MenuSectionData = { title: string; emoji: string; links: MenuLink[] };
 
 export interface SiteSettings {
   id: string;
@@ -14,6 +16,7 @@ export interface SiteSettings {
   phrases: Phrase[];
   socials: Social[];
   websites: WebsiteLink[];
+  menu_sections: MenuSectionData[];
 }
 
 export const useSiteSettings = () => {
