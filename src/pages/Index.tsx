@@ -162,33 +162,30 @@ const Index = () => {
               </button>
             </div>
           
-            <MenuSection
-              title="Tools"
-              emoji="🛠️"
-              count={tools.length}
-              links={tools}
-              delay="0.2s"
-            />
-
-            <MenuSection
-              title="Downloader"
-              emoji="⬇️"
-              count={downloaders.length}
-              links={downloaders}
-              delay="0.3s"
-            />
-
-            <MenuSection
-              title="Anime/Manga"
-              emoji="🎌"
-              count={2}
-              links={[
-                { title: "AnimeHaven", description: "Premium anime streaming", href: "https://animehaven-next.vercel.app/" },
-                { title: "GlobalComix Manga", description: "Browse manga online", href: "https://globalcomix.com/browse/manga" },
-              ]}
-              delay="0.4s"
-            />
-
+            {(settings?.menu_sections?.length
+              ? settings.menu_sections
+              : [
+                  { title: "Tools", emoji: "🛠️", links: tools },
+                  { title: "Downloader", emoji: "⬇️", links: downloaders },
+                  {
+                    title: "Anime/Manga",
+                    emoji: "🎌",
+                    links: [
+                      { title: "AnimeHaven", description: "Premium anime streaming", href: "https://animehaven-next.vercel.app/" },
+                      { title: "GlobalComix Manga", description: "Browse manga online", href: "https://globalcomix.com/browse/manga" },
+                    ],
+                  },
+                ]
+            ).map((section, i) => (
+              <MenuSection
+                key={section.title}
+                title={section.title}
+                emoji={section.emoji}
+                count={section.links.length}
+                links={section.links}
+                delay={`${0.2 + i * 0.1}s`}
+              />
+            ))}
             <div className="mt-6 animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "backwards" }}>
               <div className="liquid-panel px-4 py-4">
                 <div className="mb-2 flex items-center gap-2 text-primary">

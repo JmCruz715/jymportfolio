@@ -19,6 +19,7 @@ export type Database = {
           avatar_url: string
           bio: string
           id: string
+          menu_sections: Json
           name: string
           phrases: Json
           role_label: string
@@ -30,6 +31,7 @@ export type Database = {
           avatar_url?: string
           bio?: string
           id?: string
+          menu_sections?: Json
           name?: string
           phrases?: Json
           role_label?: string
@@ -41,6 +43,7 @@ export type Database = {
           avatar_url?: string
           bio?: string
           id?: string
+          menu_sections?: Json
           name?: string
           phrases?: Json
           role_label?: string
