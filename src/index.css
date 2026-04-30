@@ -172,10 +172,20 @@
   .liquid-panel::before {
     content: "";
     position: absolute;
-    inset: 1px;
+    inset: 0;
     border-radius: inherit;
-    background: linear-gradient(135deg, hsl(var(--foreground) / 0.12), transparent 26%, transparent 68%, hsl(var(--background) / 0.18));
+    background:
+      linear-gradient(135deg, hsl(var(--foreground) / 0.22), transparent 28%, transparent 70%, hsl(var(--background) / 0.22)),
+      radial-gradient(60% 30% at 50% 0%, hsl(var(--foreground) / 0.18), transparent 70%);
+    mix-blend-mode: overlay;
     pointer-events: none;
+    z-index: 1;
+  }
+
+  .liquid-button > *,
+  .liquid-panel > * {
+    position: relative;
+    z-index: 2;
   }
 
   .liquid-button::after {
@@ -185,10 +195,11 @@
     left: -120%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, hsl(var(--foreground) / 0.16), transparent);
+    background: linear-gradient(120deg, transparent, hsl(var(--foreground) / 0.28), transparent);
     transform: skewX(-20deg);
-    transition: left 0.7s ease;
+    transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
+    z-index: 1;
   }
 
   .liquid-button:hover::after {

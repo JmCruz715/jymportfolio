@@ -1,4 +1,5 @@
-import { Facebook, Github } from "lucide-react";
+import { Facebook, Github, Globe, Youtube, Instagram, Twitter, Linkedin, Send } from "lucide-react";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const MessengerIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -12,28 +13,44 @@ const TikTokIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const socials = [
-  { icon: Facebook, href: "https://www.facebook.com/jm.born67", label: "Facebook" },
-  { icon: TikTokIcon, href: "https://www.tiktok.com/@kaizenjym", label: "TikTok" },
-  { icon: Github, href: "https://github.com/JmCruz715", label: "GitHub" },
-  { icon: MessengerIcon, href: "https://m.me/jm.born67", label: "Messenger" },
-];
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  facebook: Facebook,
+  tiktok: TikTokIcon,
+  github: Github,
+  messenger: MessengerIcon,
+  globe: Globe,
+  website: Globe,
+  youtube: Youtube,
+  instagram: Instagram,
+  twitter: Twitter,
+  x: Twitter,
+  linkedin: Linkedin,
+  telegram: Send,
+};
 
-const SocialLinks = () => (
-  <div className="flex items-center justify-center gap-3 animate-fade-up" style={{ animationDelay: "0.35s" }}>
-    {socials.map(({ icon: Icon, href, label }) => (
-      <a
-        key={label}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={label}
-        className="w-10 h-10 rounded-full flex items-center justify-center bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-200 active:scale-95 hover:scale-110 hover:shadow-lg"
-      >
-        <Icon className="w-[18px] h-[18px]" />
-      </a>
-    ))}
-  </div>
-);
+const SocialLinks = () => {
+  const { settings } = useSiteSettings();
+  const socials = settings?.socials ?? [];
+
+  return (
+    <div className="flex items-center justify-center flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+      {socials.map(({ icon, href, label }) => {
+        const Icon = ICON_MAP[icon?.toLowerCase()] ?? Globe;
+        return (
+          <a
+            key={label + href}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={label}
+            className="liquid-icon-button group"
+          >
+            <Icon className="w-[18px] h-[18px] transition-transform duration-300 group-hover:scale-110" />
+          </a>
+        );
+      })}
+    </div>
+  );
+};
 
 export default SocialLinks;
