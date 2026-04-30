@@ -120,7 +120,7 @@ const Index = () => {
       <div className="fixed inset-0 z-20 animate-fade-in" onClick={() => setMenuOpen(false)}>
           <div className="absolute inset-0 bg-background/60 backdrop-blur-sm transition-opacity duration-300" />
           <div
-          className="absolute right-0 top-0 h-full w-72 liquid-panel rounded-none border-l p-6 pt-16 overflow-y-auto animate-slide-in-right"
+          className="absolute right-0 top-0 h-full w-[78vw] max-w-xs sm:w-72 liquid-panel rounded-none border-l p-4 sm:p-6 pt-16 overflow-y-auto animate-slide-in-right"
           onClick={(e) => e.stopPropagation()}>
 
             {/* Shop */}
