@@ -12,7 +12,7 @@ const SUGGESTIONS = [
   "I-update ang Facebook link",
 ];
 
-export const AdminAIChat = ({ onChanged }: { onChanged: () => void }) => {
+export const AdminAIChat = ({ onChanged, inline = false }: { onChanged: () => void; inline?: boolean }) => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
     {
