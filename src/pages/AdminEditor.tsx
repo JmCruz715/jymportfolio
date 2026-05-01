@@ -149,6 +149,9 @@ const AdminEditor = () => {
           <p className="text-xs text-muted-foreground">I-edit ang lahat sa portfolio mo dito.</p>
         </div>
 
+        {/* AI ASSISTANT (inline, sa taas ng profile) */}
+        <AdminAIChat onChanged={reload} inline />
+
         {/* PROFILE */}
         <Section title="Profile">
           {/* Avatar uploader */}
@@ -391,7 +394,7 @@ const AdminEditor = () => {
         </div>
       </div>
 
-      <AdminAIChat onChanged={reload} />
+      
     </div>
   );
 };

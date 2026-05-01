@@ -12,7 +12,7 @@ const SUGGESTIONS = [
   "I-update ang Facebook link",
 ];
 
-export const AdminAIChat = ({ onChanged }: { onChanged: () => void }) => {
+export const AdminAIChat = ({ onChanged, inline = false }: { onChanged: () => void; inline?: boolean }) => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
     {
@@ -63,6 +63,83 @@ export const AdminAIChat = ({ onChanged }: { onChanged: () => void }) => {
       setLoading(false);
     }
   };
+
+  if (inline) {
+    return (
+      <div className="liquid-panel overflow-hidden animate-liquid-in flex flex-col">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50">
+          <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-sm font-semibold">AI Assistant</h3>
+            <p className="text-[10px] text-muted-foreground">Walang limit · pwede mag-edit ng lahat</p>
+          </div>
+        </div>
+
+        <div ref={scrollRef} className="max-h-72 overflow-y-auto px-4 py-3 space-y-3">
+          {messages.map((m, i) => (
+            <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div
+                className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm whitespace-pre-wrap ${
+                  m.role === "user"
+                    ? "bg-primary text-primary-foreground rounded-br-sm"
+                    : "bg-card border border-border/60 rounded-bl-sm"
+                }`}
+              >
+                {m.content}
+                {m.changes && m.changes.length > 0 && (
+                  <div className="mt-2 pt-2 border-t border-border/40 text-[11px] text-primary">
+                    ✓ {m.changes.join(" · ")}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+          {loading && (
+            <div className="flex justify-start">
+              <div className="bg-card border border-border/60 rounded-2xl rounded-bl-sm px-3 py-2 flex items-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin text-primary" />
+                <span className="text-xs text-muted-foreground">Iniisip...</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {messages.length <= 1 && !loading && (
+          <div className="px-4 pb-2 flex flex-wrap gap-1.5">
+            {SUGGESTIONS.map((s) => (
+              <button
+                key={s}
+                onClick={() => send(s)}
+                className="text-[11px] px-2.5 py-1 rounded-full border border-border/60 hover:bg-card transition-colors"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="p-3 border-t border-border/50 flex gap-2">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
+            placeholder="Sabihin sa AI..."
+            disabled={loading}
+            className="flex-1 h-10 px-3 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
+          <button
+            onClick={() => send()}
+            disabled={loading || !input.trim()}
+            className="liquid-button liquid-button-primary w-10 h-10 p-0 flex items-center justify-center disabled:opacity-50"
+          >
+            <Send className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
