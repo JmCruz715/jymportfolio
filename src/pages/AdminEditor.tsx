@@ -394,7 +394,7 @@ const AdminEditor = () => {
         </div>
       </div>
 
-      <AdminAIChat onChanged={reload} />
+      
     </div>
   );
 };
