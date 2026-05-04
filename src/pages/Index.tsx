@@ -154,6 +154,19 @@ const Index = () => {
               </button>
             </div>
 
+            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.17s", animationFillMode: "backwards" }}>
+              <button
+                onClick={() => { setMenuOpen(false); setChatOpen(true); }}
+                className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
+              >
+                <Bot className="w-5 h-5 text-primary" />
+                <div className="min-w-0 text-left">
+                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">ChatGPT Pro</p>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">Magtanong sa AI assistant</p>
+                </div>
+              </button>
+            </div>
+
             <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.18s", animationFillMode: "backwards" }}>
               <button
                 onClick={() => { setMenuOpen(false); navigate("/admin/login"); }}
@@ -212,6 +225,32 @@ const Index = () => {
         {/* Profile */}
         <ScrollReveal variant="scale">
           <ProfileCard />
+        </ScrollReveal>
+
+        {/* ChatGPT Pro quick button */}
+        <ScrollReveal delay="0.05s" variant="fade-up">
+          <button
+            onClick={() => setChatOpen(true)}
+            className="w-full liquid-button liquid-button-primary h-12 gap-2 text-sm font-semibold"
+          >
+            <Bot className="w-5 h-5" /> ChatGPT Pro
+            <span className="ml-auto text-[10px] opacity-80 font-normal">Magtanong sa AI</span>
+          </button>
+        </ScrollReveal>
+
+        {/* Highlights row (myday) */}
+        <ScrollReveal delay="0.07s" variant="fade-up">
+          <HighlightsRow />
+        </ScrollReveal>
+
+        {/* Album */}
+        <ScrollReveal delay="0.08s" variant="fade-up">
+          <AlbumGrid />
+        </ScrollReveal>
+
+        {/* Notes */}
+        <ScrollReveal delay="0.09s" variant="fade-up">
+          <NotesFeed />
         </ScrollReveal>
 
         {/* Social links */}
