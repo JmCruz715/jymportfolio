@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, LogOut, Plus, Trash2, Save, Eye, Camera, Loader2 } from "lucide-react";
 import { AdminAIChat } from "@/components/AdminAIChat";
+import { AdminMediaManager } from "@/components/AdminMediaManager";
 
 // Mga preset color para sa phrases (label + tailwind class + hex preview)
 const COLOR_OPTIONS: { label: string; value: string; hex: string }[] = [
@@ -193,6 +194,9 @@ const AdminEditor = () => {
             <Textarea rows={4} value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Sumulat ng maikling kwento tungkol sa iyo" />
           </Field>
         </Section>
+
+        {/* MEDIA: Highlights, Album, Notes */}
+        <AdminMediaManager />
 
         {/* PHRASES */}
         <Section

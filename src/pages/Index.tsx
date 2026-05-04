@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles, Lock } from "lucide-react";
+import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles, Lock, Bot } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
@@ -9,6 +9,10 @@ import BatteryIndicator from "@/components/BatteryIndicator";
 import MenuSection from "@/components/MenuSection";
 import MusicButton from "@/components/MusicButton";
 import WebsitesSection from "@/components/WebsitesSection";
+import HighlightsRow from "@/components/HighlightsRow";
+import AlbumGrid from "@/components/AlbumGrid";
+import NotesFeed from "@/components/NotesFeed";
+import ChatGPTProModal from "@/components/ChatGPTProModal";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const tools = [
@@ -74,6 +78,7 @@ const ScrollReveal = ({ children, className = "", delay = "0s", variant = "fade-
 const Index = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("theme") !== "light";
@@ -149,6 +154,19 @@ const Index = () => {
               </button>
             </div>
 
+            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.17s", animationFillMode: "backwards" }}>
+              <button
+                onClick={() => { setMenuOpen(false); setChatOpen(true); }}
+                className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
+              >
+                <Bot className="w-5 h-5 text-primary" />
+                <div className="min-w-0 text-left">
+                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">ChatGPT Pro</p>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">Magtanong sa AI assistant</p>
+                </div>
+              </button>
+            </div>
+
             <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.18s", animationFillMode: "backwards" }}>
               <button
                 onClick={() => { setMenuOpen(false); navigate("/admin/login"); }}
@@ -209,6 +227,32 @@ const Index = () => {
           <ProfileCard />
         </ScrollReveal>
 
+        {/* ChatGPT Pro quick button */}
+        <ScrollReveal delay="0.05s" variant="fade-up">
+          <button
+            onClick={() => setChatOpen(true)}
+            className="w-full liquid-button liquid-button-primary h-12 gap-2 text-sm font-semibold"
+          >
+            <Bot className="w-5 h-5" /> ChatGPT Pro
+            <span className="ml-auto text-[10px] opacity-80 font-normal">Magtanong sa AI</span>
+          </button>
+        </ScrollReveal>
+
+        {/* Highlights row (myday) */}
+        <ScrollReveal delay="0.07s" variant="fade-up">
+          <HighlightsRow />
+        </ScrollReveal>
+
+        {/* Album */}
+        <ScrollReveal delay="0.08s" variant="fade-up">
+          <AlbumGrid />
+        </ScrollReveal>
+
+        {/* Notes */}
+        <ScrollReveal delay="0.09s" variant="fade-up">
+          <NotesFeed />
+        </ScrollReveal>
+
         {/* Social links */}
         <ScrollReveal delay="0.1s" variant="zoom-rotate">
           <SocialLinks />
@@ -243,6 +287,8 @@ const Index = () => {
           </footer>
         </ScrollReveal>
       </main>
+
+      <ChatGPTProModal open={chatOpen} onClose={() => setChatOpen(false)} />
     </div>);
 };
 

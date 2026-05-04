@@ -14,6 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
+      album_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          image_url: string
+          sort_order: number
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url: string
+          sort_order?: number
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      highlights: {
+        Row: {
+          created_at: string
+          id: string
+          media_type: string
+          media_url: string
+          sort_order: number
+          title: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          media_type?: string
+          media_url: string
+          sort_order?: number
+          title?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          media_type?: string
+          media_url?: string
+          sort_order?: number
+          title?: string | null
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          color: string
+          content: string
+          created_at: string
+          id: string
+          title: string | null
+        }
+        Insert: {
+          color?: string
+          content: string
+          created_at?: string
+          id?: string
+          title?: string | null
+        }
+        Update: {
+          color?: string
+          content?: string
+          created_at?: string
+          id?: string
+          title?: string | null
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           avatar_url: string
