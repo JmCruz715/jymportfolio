@@ -13,6 +13,7 @@ import HighlightsRow from "@/components/HighlightsRow";
 import AlbumGrid from "@/components/AlbumGrid";
 import NotesFeed from "@/components/NotesFeed";
 import ChatGPTProModal from "@/components/ChatGPTProModal";
+import LocationMap from "@/components/LocationMap";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const tools = [
@@ -266,6 +267,11 @@ const Index = () => {
         {/* Stats */}
         <ScrollReveal delay="0.15s" variant="slide-left">
           <StatsRow />
+        </ScrollReveal>
+
+        {/* Location map */}
+        <ScrollReveal delay="0.13s" variant="fade-up">
+          <LocationMap />
         </ScrollReveal>
 
         {/* Clock */}
