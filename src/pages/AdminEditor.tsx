@@ -195,6 +195,9 @@ const AdminEditor = () => {
           </Field>
         </Section>
 
+        {/* MEDIA: Highlights, Album, Notes */}
+        <AdminMediaManager />
+
         {/* PHRASES */}
         <Section
           title="Mga Quote / Phrases (typewriter)"
