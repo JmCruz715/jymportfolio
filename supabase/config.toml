@@ -1,1 +1,4 @@
 project_id = "tmanjwruiogtyakddyci"
+
+[functions.chatgpt-pro]
+verify_jwt = false
