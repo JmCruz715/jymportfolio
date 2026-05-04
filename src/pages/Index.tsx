@@ -287,6 +287,8 @@ const Index = () => {
           </footer>
         </ScrollReveal>
       </main>
+
+      <ChatGPTProModal open={chatOpen} onClose={() => setChatOpen(false)} />
     </div>);
 };
 
