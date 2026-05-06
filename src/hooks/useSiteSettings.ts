@@ -13,6 +13,7 @@ export interface SiteSettings {
   role_label: string;
   bio: string;
   avatar_url: string;
+  cover_url: string;
   phrases: Phrase[];
   socials: Social[];
   websites: WebsiteLink[];

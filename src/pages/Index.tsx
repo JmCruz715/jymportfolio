@@ -9,10 +9,9 @@ import BatteryIndicator from "@/components/BatteryIndicator";
 import MenuSection from "@/components/MenuSection";
 import MusicButton from "@/components/MusicButton";
 import WebsitesSection from "@/components/WebsitesSection";
-import HighlightsRow from "@/components/HighlightsRow";
+
 import AlbumGrid from "@/components/AlbumGrid";
 import NotesFeed from "@/components/NotesFeed";
-import ChatGPTProModal from "@/components/ChatGPTProModal";
 import LocationMap from "@/components/LocationMap";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
@@ -79,7 +78,6 @@ const ScrollReveal = ({ children, className = "", delay = "0s", variant = "fade-
 const Index = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("theme") !== "light";
@@ -157,7 +155,7 @@ const Index = () => {
 
             <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.17s", animationFillMode: "backwards" }}>
               <button
-                onClick={() => { setMenuOpen(false); setChatOpen(true); }}
+                onClick={() => { setMenuOpen(false); navigate("/chatgpt"); }}
                 className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
               >
                 <Bot className="w-5 h-5 text-primary" />
@@ -223,35 +221,19 @@ const Index = () => {
       {/* Main content */}
       <main className="max-w-md mx-auto px-5 py-20 flex flex-col gap-8">
 
-        {/* Profile */}
+        {/* Notes - on top of profile (Facebook-style status) */}
+        <ScrollReveal delay="0.04s" variant="fade-up">
+          <NotesFeed />
+        </ScrollReveal>
+
+        {/* Profile (cover + avatar) */}
         <ScrollReveal variant="scale">
           <ProfileCard />
-        </ScrollReveal>
-
-        {/* ChatGPT Pro quick button */}
-        <ScrollReveal delay="0.05s" variant="fade-up">
-          <button
-            onClick={() => setChatOpen(true)}
-            className="w-full liquid-button liquid-button-primary h-12 gap-2 text-sm font-semibold"
-          >
-            <Bot className="w-5 h-5" /> ChatGPT Pro
-            <span className="ml-auto text-[10px] opacity-80 font-normal">Magtanong sa AI</span>
-          </button>
-        </ScrollReveal>
-
-        {/* Highlights row (myday) */}
-        <ScrollReveal delay="0.07s" variant="fade-up">
-          <HighlightsRow />
         </ScrollReveal>
 
         {/* Album */}
         <ScrollReveal delay="0.08s" variant="fade-up">
           <AlbumGrid />
-        </ScrollReveal>
-
-        {/* Notes */}
-        <ScrollReveal delay="0.09s" variant="fade-up">
-          <NotesFeed />
         </ScrollReveal>
 
         {/* Social links */}
@@ -293,8 +275,6 @@ const Index = () => {
           </footer>
         </ScrollReveal>
       </main>
-
-      <ChatGPTProModal open={chatOpen} onClose={() => setChatOpen(false)} />
     </div>);
 };
 

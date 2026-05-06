@@ -46,6 +46,7 @@ const AdminEditor = () => {
   const [roleLabel, setRoleLabel] = useState("");
   const [bio, setBio] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [coverUrl, setCoverUrl] = useState("");
   const [phrases, setPhrases] = useState<Phrase[]>([]);
   const [socials, setSocials] = useState<Social[]>([]);
   const [websites, setWebsites] = useState<WebsiteLink[]>([]);
@@ -63,6 +64,7 @@ const AdminEditor = () => {
       setRoleLabel(settings.role_label);
       setBio(settings.bio);
       setAvatarUrl(settings.avatar_url);
+      setCoverUrl(settings.cover_url ?? "");
       setPhrases(settings.phrases ?? []);
       setSocials(settings.socials ?? []);
       setWebsites(settings.websites ?? []);
@@ -104,6 +106,7 @@ const AdminEditor = () => {
         role_label: roleLabel,
         bio,
         avatar_url: avatarUrl,
+        cover_url: coverUrl,
         phrases: phrases as never,
         socials: socials as never,
         websites: websites as never,
@@ -187,6 +190,9 @@ const AdminEditor = () => {
             />
             <p className="text-[10px] text-muted-foreground">Pindutin ang larawan para palitan</p>
           </div>
+
+          {/* Cover photo uploader */}
+          <CoverUploader value={coverUrl} onChange={setCoverUrl} />
 
           <Field label="Pangalan"><Input value={name} onChange={(e) => setName(e.target.value)} /></Field>
           <Field label="Title / Tungkulin"><Input value={roleLabel} onChange={(e) => setRoleLabel(e.target.value)} placeholder="Halimbawa: Developer" /></Field>
@@ -461,6 +467,54 @@ const ColorPicker = ({ value, onChange }: { value: string; onChange: (v: string)
           </div>
         </>
       )}
+    </div>
+  );
+};
+
+const CoverUploader = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [busy, setBusy] = useState(false);
+
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setBusy(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `cover-${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, {
+      cacheControl: "3600", upsert: true, contentType: file.type,
+    });
+    if (upErr) {
+      setBusy(false);
+      toast({ title: "Hindi nai-upload", description: upErr.message, variant: "destructive" });
+      return;
+    }
+    const { data: pub } = supabase.storage.from("avatars").getPublicUrl(path);
+    onChange(pub.publicUrl);
+    setBusy(false);
+    toast({ title: "Cover handa na", description: "Pindutin ang Save para itago." });
+  };
+
+  return (
+    <div className="flex flex-col gap-2 py-2">
+      <label className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Cover Photo</label>
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        disabled={busy}
+        className="relative w-full h-32 rounded-xl overflow-hidden border-2 border-primary/40 bg-card group"
+      >
+        {value && <img src={value} alt="cover" className="w-full h-full object-cover" />}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          {busy ? <Loader2 className="w-7 h-7 text-white animate-spin" /> : <Camera className="w-7 h-7 text-white" />}
+        </div>
+        {!value && (
+          <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground">
+            Pindutin para mag-upload ng cover
+          </div>
+        )}
+      </button>
+      <input ref={inputRef} type="file" accept="image/*" hidden onChange={onFile} />
     </div>
   );
 };
