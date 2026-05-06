@@ -46,6 +46,7 @@ const AdminEditor = () => {
   const [roleLabel, setRoleLabel] = useState("");
   const [bio, setBio] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [coverUrl, setCoverUrl] = useState("");
   const [phrases, setPhrases] = useState<Phrase[]>([]);
   const [socials, setSocials] = useState<Social[]>([]);
   const [websites, setWebsites] = useState<WebsiteLink[]>([]);
