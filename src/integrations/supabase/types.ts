@@ -93,6 +93,7 @@ export type Database = {
         Row: {
           avatar_url: string
           bio: string
+          cover_url: string
           id: string
           menu_sections: Json
           name: string
@@ -105,6 +106,7 @@ export type Database = {
         Insert: {
           avatar_url?: string
           bio?: string
+          cover_url?: string
           id?: string
           menu_sections?: Json
           name?: string
@@ -117,6 +119,7 @@ export type Database = {
         Update: {
           avatar_url?: string
           bio?: string
+          cover_url?: string
           id?: string
           menu_sections?: Json
           name?: string
