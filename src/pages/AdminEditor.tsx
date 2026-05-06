@@ -191,6 +191,9 @@ const AdminEditor = () => {
             <p className="text-[10px] text-muted-foreground">Pindutin ang larawan para palitan</p>
           </div>
 
+          {/* Cover photo uploader */}
+          <CoverUploader value={coverUrl} onChange={setCoverUrl} />
+
           <Field label="Pangalan"><Input value={name} onChange={(e) => setName(e.target.value)} /></Field>
           <Field label="Title / Tungkulin"><Input value={roleLabel} onChange={(e) => setRoleLabel(e.target.value)} placeholder="Halimbawa: Developer" /></Field>
           <Field label="Bio (tungkol sa iyo)">
