@@ -471,4 +471,52 @@ const ColorPicker = ({ value, onChange }: { value: string; onChange: (v: string)
   );
 };
 
+const CoverUploader = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [busy, setBusy] = useState(false);
+
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setBusy(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `cover-${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, {
+      cacheControl: "3600", upsert: true, contentType: file.type,
+    });
+    if (upErr) {
+      setBusy(false);
+      toast({ title: "Hindi nai-upload", description: upErr.message, variant: "destructive" });
+      return;
+    }
+    const { data: pub } = supabase.storage.from("avatars").getPublicUrl(path);
+    onChange(pub.publicUrl);
+    setBusy(false);
+    toast({ title: "Cover handa na", description: "Pindutin ang Save para itago." });
+  };
+
+  return (
+    <div className="flex flex-col gap-2 py-2">
+      <label className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Cover Photo</label>
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        disabled={busy}
+        className="relative w-full h-32 rounded-xl overflow-hidden border-2 border-primary/40 bg-card group"
+      >
+        {value && <img src={value} alt="cover" className="w-full h-full object-cover" />}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          {busy ? <Loader2 className="w-7 h-7 text-white animate-spin" /> : <Camera className="w-7 h-7 text-white" />}
+        </div>
+        {!value && (
+          <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground">
+            Pindutin para mag-upload ng cover
+          </div>
+        )}
+      </button>
+      <input ref={inputRef} type="file" accept="image/*" hidden onChange={onFile} />
+    </div>
+  );
+};
+
 export default AdminEditor;
