@@ -10,8 +10,6 @@ import MenuSection from "@/components/MenuSection";
 import MusicButton from "@/components/MusicButton";
 import WebsitesSection from "@/components/WebsitesSection";
 
-import AlbumGrid from "@/components/AlbumGrid";
-import NotesFeed from "@/components/NotesFeed";
 import LocationMap from "@/components/LocationMap";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
