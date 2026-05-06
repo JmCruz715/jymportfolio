@@ -10,6 +10,7 @@ import Payment from "./pages/Payment.tsx";
 import DownloadApps from "./pages/DownloadApps.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminEditor from "./pages/AdminEditor.tsx";
+import ChatGPTPro from "./pages/ChatGPTPro.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
