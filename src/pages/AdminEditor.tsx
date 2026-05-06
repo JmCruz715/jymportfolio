@@ -106,6 +106,7 @@ const AdminEditor = () => {
         role_label: roleLabel,
         bio,
         avatar_url: avatarUrl,
+        cover_url: coverUrl,
         phrases: phrases as never,
         socials: socials as never,
         websites: websites as never,
