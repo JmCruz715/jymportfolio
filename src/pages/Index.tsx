@@ -10,8 +10,6 @@ import MenuSection from "@/components/MenuSection";
 import MusicButton from "@/components/MusicButton";
 import WebsitesSection from "@/components/WebsitesSection";
 
-import AlbumGrid from "@/components/AlbumGrid";
-import NotesFeed from "@/components/NotesFeed";
 import LocationMap from "@/components/LocationMap";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
@@ -221,19 +219,9 @@ const Index = () => {
       {/* Main content */}
       <main className="max-w-md mx-auto px-5 py-20 flex flex-col gap-8">
 
-        {/* Notes - on top of profile (Facebook-style status) */}
-        <ScrollReveal delay="0.04s" variant="fade-up">
-          <NotesFeed />
-        </ScrollReveal>
-
         {/* Profile (cover + avatar) */}
         <ScrollReveal variant="scale">
           <ProfileCard />
-        </ScrollReveal>
-
-        {/* Album */}
-        <ScrollReveal delay="0.08s" variant="fade-up">
-          <AlbumGrid />
         </ScrollReveal>
 
         {/* Social links */}
