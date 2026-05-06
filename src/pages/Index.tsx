@@ -78,7 +78,6 @@ const ScrollReveal = ({ children, className = "", delay = "0s", variant = "fade-
 const Index = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("theme") !== "light";
