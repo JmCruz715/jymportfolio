@@ -9,7 +9,7 @@ import BatteryIndicator from "@/components/BatteryIndicator";
 import MenuSection from "@/components/MenuSection";
 import MusicButton from "@/components/MusicButton";
 import WebsitesSection from "@/components/WebsitesSection";
-import HighlightsRow from "@/components/HighlightsRow";
+
 import AlbumGrid from "@/components/AlbumGrid";
 import NotesFeed from "@/components/NotesFeed";
 import LocationMap from "@/components/LocationMap";
