@@ -222,35 +222,19 @@ const Index = () => {
       {/* Main content */}
       <main className="max-w-md mx-auto px-5 py-20 flex flex-col gap-8">
 
-        {/* Profile */}
+        {/* Notes - on top of profile (Facebook-style status) */}
+        <ScrollReveal delay="0.04s" variant="fade-up">
+          <NotesFeed />
+        </ScrollReveal>
+
+        {/* Profile (cover + avatar) */}
         <ScrollReveal variant="scale">
           <ProfileCard />
-        </ScrollReveal>
-
-        {/* ChatGPT Pro quick button */}
-        <ScrollReveal delay="0.05s" variant="fade-up">
-          <button
-            onClick={() => setChatOpen(true)}
-            className="w-full liquid-button liquid-button-primary h-12 gap-2 text-sm font-semibold"
-          >
-            <Bot className="w-5 h-5" /> ChatGPT Pro
-            <span className="ml-auto text-[10px] opacity-80 font-normal">Magtanong sa AI</span>
-          </button>
-        </ScrollReveal>
-
-        {/* Highlights row (myday) */}
-        <ScrollReveal delay="0.07s" variant="fade-up">
-          <HighlightsRow />
         </ScrollReveal>
 
         {/* Album */}
         <ScrollReveal delay="0.08s" variant="fade-up">
           <AlbumGrid />
-        </ScrollReveal>
-
-        {/* Notes */}
-        <ScrollReveal delay="0.09s" variant="fade-up">
-          <NotesFeed />
         </ScrollReveal>
 
         {/* Social links */}
@@ -292,8 +276,6 @@ const Index = () => {
           </footer>
         </ScrollReveal>
       </main>
-
-      <ChatGPTProModal open={chatOpen} onClose={() => setChatOpen(false)} />
     </div>);
 };
 
