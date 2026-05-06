@@ -64,6 +64,7 @@ const AdminEditor = () => {
       setRoleLabel(settings.role_label);
       setBio(settings.bio);
       setAvatarUrl(settings.avatar_url);
+      setCoverUrl(settings.cover_url ?? "");
       setPhrases(settings.phrases ?? []);
       setSocials(settings.socials ?? []);
       setWebsites(settings.websites ?? []);
