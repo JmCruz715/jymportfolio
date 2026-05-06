@@ -29,6 +29,7 @@ const App = () => (
             <Route path="/payment/:id" element={<Payment />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminEditor />} />
+            <Route path="/chatgpt" element={<ChatGPTPro />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
