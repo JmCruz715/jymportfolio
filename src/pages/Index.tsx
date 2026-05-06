@@ -156,7 +156,7 @@ const Index = () => {
 
             <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.17s", animationFillMode: "backwards" }}>
               <button
-                onClick={() => { setMenuOpen(false); setChatOpen(true); }}
+                onClick={() => { setMenuOpen(false); navigate("/chatgpt"); }}
                 className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
               >
                 <Bot className="w-5 h-5 text-primary" />
