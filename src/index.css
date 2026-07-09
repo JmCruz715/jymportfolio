@@ -213,6 +213,15 @@
   .animate-fade-in {
     animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
+
+  .smooth-card {
+    @apply rounded-2xl border border-border/60 bg-card/90;
+    box-shadow: 0 8px 24px -12px hsl(var(--foreground) / 0.18);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .smooth-btn {
+    @apply inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-foreground bg-transparent hover:bg-secondary/70 transition-all duration-300 active:scale-[0.97];
+  }
 }
 
 @keyframes fadeUp {

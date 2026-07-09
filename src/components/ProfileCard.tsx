@@ -1,4 +1,5 @@
 import { Check, Camera } from "lucide-react";
+import VerifiedBadge from "@/components/VerifiedBadge";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
@@ -105,9 +106,7 @@ const ProfileCard = () => {
       <div className="text-center mt-3">
         <h1 className="text-2xl font-bold text-foreground flex items-center justify-center gap-1.5 leading-tight animate-fade-up" style={{ animationDelay: "0.25s" }}>
           {settings?.name ?? "..."}
-          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[hsl(214,89%,52%)] shrink-0 animate-bounce" style={{ animationDuration: "2s" }}>
-            <Check className="w-3 h-3 text-white stroke-[3]" />
-          </span>
+          <VerifiedBadge size={20} className="shrink-0 drop-shadow" />
         </h1>
         <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mt-1.5 animate-fade-up" style={{ animationDelay: "0.35s" }}>
           {settings?.role_label ?? "Developer"}
