@@ -1,16 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, Menu, X, ShoppingBag, Download, Sparkles, Lock, Bot } from "lucide-react";
+import { X, ShoppingBag, Download, Sparkles, Lock, Bot, Menu as MenuIcon } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SocialLinks from "@/components/SocialLinks";
 import StatsRow from "@/components/StatsRow";
-import LiveClock from "@/components/LiveClock";
-import BatteryIndicator from "@/components/BatteryIndicator";
 import MenuSection from "@/components/MenuSection";
 import MusicButton from "@/components/MusicButton";
-import WebsitesSection from "@/components/WebsitesSection";
-
 import LocationMap from "@/components/LocationMap";
+import TopNav from "@/components/TopNav";
+import StatusStrip from "@/components/StatusStrip";
+import ContactCard from "@/components/ContactCard";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const tools = [
@@ -23,19 +22,17 @@ const tools = [
   { title: "All in One Tools", description: "All-in-one social media downloader", href: "https://all-social-media-downloader-seven.vercel.app/" },
 ];
 
-
 const downloaders = [
-{ title: "Spotify Downloader", description: "Download music from Spotify", href: "https://mysteriousq-spotifydl.onrender.com/" },
-{ title: "YouTube Downloader", description: "Download video from YouTube", href: "https://mysteriousq-ytdl.onrender.com/" },
-{ title: "Facebook Downloader", description: "Download video from Facebook", href: "https://mysteriousq-fbdl.onrender.com/" },
-{ title: "TikTok Downloader", description: "Download TikTok without watermark", href: "https://mysteriousq-tiktokdl.onrender.com/" },
-{ title: "X Downloader", description: "Download video from Twitter", href: "https://mysteriousq-xdownloader.onrender.com/" }];
-
+  { title: "Spotify Downloader", description: "Download music from Spotify", href: "https://mysteriousq-spotifydl.onrender.com/" },
+  { title: "YouTube Downloader", description: "Download video from YouTube", href: "https://mysteriousq-ytdl.onrender.com/" },
+  { title: "Facebook Downloader", description: "Download video from Facebook", href: "https://mysteriousq-fbdl.onrender.com/" },
+  { title: "TikTok Downloader", description: "Download TikTok without watermark", href: "https://mysteriousq-tiktokdl.onrender.com/" },
+  { title: "X Downloader", description: "Download video from Twitter", href: "https://mysteriousq-xdownloader.onrender.com/" },
+];
 
 const useScrollReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
@@ -44,18 +41,15 @@ const useScrollReveal = () => {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
-
   return { ref, isVisible };
 };
 
-type RevealVariant = "fade-up" | "slide-left" | "slide-right" | "scale" | "flip" | "zoom-rotate";
-
+type RevealVariant = "fade-up" | "slide-left" | "slide-right" | "scale" | "zoom-rotate";
 const variantStyles: Record<RevealVariant, { hidden: string; visible: string }> = {
   "fade-up": { hidden: "opacity-0 translate-y-8", visible: "opacity-100 translate-y-0" },
   "slide-left": { hidden: "opacity-0 -translate-x-12", visible: "opacity-100 translate-x-0" },
   "slide-right": { hidden: "opacity-0 translate-x-12", visible: "opacity-100 translate-x-0" },
   "scale": { hidden: "opacity-0 scale-75", visible: "opacity-100 scale-100" },
-  "flip": { hidden: "opacity-0 rotate-x-90", visible: "opacity-100 rotate-x-0" },
   "zoom-rotate": { hidden: "opacity-0 scale-50 -rotate-6", visible: "opacity-100 scale-100 rotate-0" },
 };
 
@@ -95,41 +89,46 @@ const Index = () => {
 
   const { settings } = useSiteSettings();
 
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    else window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Top-left music button */}
-      <div className="fixed top-0 left-0 p-4 z-30 animate-fade-in">
+      {/* Floating music (top-left) */}
+      <div className="fixed top-3 left-3 z-40 animate-fade-in">
         <MusicButton />
       </div>
-      {/* Top-right controls */}
-      <div className="fixed top-0 right-0 p-4 flex items-center justify-end z-30 animate-fade-in">
-        <div className="flex items-center gap-3">
-        <button
-          onClick={() => setIsDark(!isDark)}
-          className="liquid-icon-button">
-          {isDark ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
-        </button>
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="liquid-icon-button">
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-        </div>
-      </div>
+
+      {/* Top nav */}
+      <TopNav
+        onHome={() => scrollTo("home")}
+        onProfile={() => scrollTo("profile")}
+        onMenu={() => setMenuOpen(true)}
+        isDark={isDark}
+        onToggleTheme={() => setIsDark(!isDark)}
+      />
 
       {/* Slide-out menu */}
-      {menuOpen &&
-      <div className="fixed inset-0 z-20 animate-fade-in" onClick={() => setMenuOpen(false)}>
-          <div className="absolute inset-0 bg-background/60 backdrop-blur-sm transition-opacity duration-300" />
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 animate-fade-in" onClick={() => setMenuOpen(false)}>
+          <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
           <div
-          className="absolute right-0 top-0 h-full w-[78vw] max-w-xs sm:w-72 liquid-panel rounded-none border-l p-4 sm:p-6 pt-16 overflow-y-auto animate-slide-in-right"
-          onClick={(e) => e.stopPropagation()}>
+            className="absolute right-0 top-0 h-full w-[78vw] max-w-xs sm:w-72 liquid-panel rounded-none border-l p-4 sm:p-6 pt-6 overflow-y-auto animate-slide-in-right"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-end mb-3">
+              <button onClick={() => setMenuOpen(false)} className="smooth-btn !p-2" aria-label="Close menu">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-            {/* Shop */}
-            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
+            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
               <button
                 onClick={() => { setMenuOpen(false); navigate("/shop"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3 group">
+                className="liquid-button w-full justify-start gap-3 px-3 py-3">
                 <ShoppingBag className="w-5 h-5 text-primary" />
                 <div className="min-w-0 text-left">
                   <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Shop</p>
@@ -138,10 +137,10 @@ const Index = () => {
               </button>
             </div>
 
-            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.15s", animationFillMode: "backwards" }}>
+            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.15s", animationFillMode: "backwards" }}>
               <button
                 onClick={() => { setMenuOpen(false); navigate("/downloads"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
+                className="liquid-button w-full justify-start gap-3 px-3 py-3"
               >
                 <Download className="w-5 h-5 text-primary" />
                 <div className="min-w-0 text-left">
@@ -151,10 +150,10 @@ const Index = () => {
               </button>
             </div>
 
-            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.17s", animationFillMode: "backwards" }}>
+            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.17s", animationFillMode: "backwards" }}>
               <button
                 onClick={() => { setMenuOpen(false); navigate("/chatgpt"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
+                className="liquid-button w-full justify-start gap-3 px-3 py-3"
               >
                 <Bot className="w-5 h-5 text-primary" />
                 <div className="min-w-0 text-left">
@@ -164,10 +163,10 @@ const Index = () => {
               </button>
             </div>
 
-            <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.18s", animationFillMode: "backwards" }}>
+            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.18s", animationFillMode: "backwards" }}>
               <button
                 onClick={() => { setMenuOpen(false); navigate("/admin/login"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3 group"
+                className="liquid-button w-full justify-start gap-3 px-3 py-3"
               >
                 <Lock className="w-5 h-5 text-primary" />
                 <div className="min-w-0 text-left">
@@ -176,7 +175,7 @@ const Index = () => {
                 </div>
               </button>
             </div>
-          
+
             {(settings?.menu_sections?.length
               ? settings.menu_sections
               : [
@@ -201,6 +200,7 @@ const Index = () => {
                 delay={`${0.2 + i * 0.1}s`}
               />
             ))}
+
             <div className="mt-6 animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "backwards" }}>
               <div className="liquid-panel px-4 py-4">
                 <div className="mb-2 flex items-center gap-2 text-primary">
@@ -208,62 +208,71 @@ const Index = () => {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.24em]">About</p>
                 </div>
                 <p className="text-xs leading-6 text-muted-foreground">
-                  {settings?.bio ?? "jmcruz builds clean tools, curated links, shop drops, and anime picks in one smooth liquid-glass space."}
+                  {settings?.bio ?? "jmcruz — clean tools, curated links, shop drops, and anime picks in one smooth space."}
                 </p>
               </div>
             </div>
           </div>
         </div>
-      }
+      )}
 
       {/* Main content */}
-      <main className="max-w-md mx-auto px-5 py-20 flex flex-col gap-8">
+      <main id="home" className="max-w-md mx-auto px-5 pt-20 pb-16 flex flex-col gap-6">
 
-        {/* Profile (cover + avatar) */}
-        <ScrollReveal variant="scale">
-          <ProfileCard />
+        {/* Status strip */}
+        <ScrollReveal variant="fade-up">
+          <StatusStrip />
         </ScrollReveal>
 
-        {/* Social links */}
-        <ScrollReveal delay="0.1s" variant="zoom-rotate">
-          <SocialLinks />
-        </ScrollReveal>
+        {/* Profile */}
+        <div id="profile" className="scroll-mt-20 flex flex-col gap-6">
+          <ScrollReveal variant="scale">
+            <ProfileCard />
+          </ScrollReveal>
 
-        {/* Connected websites */}
-        <ScrollReveal delay="0.12s" variant="fade-up">
-          <WebsitesSection />
-        </ScrollReveal>
+          {/* Social links */}
+          <ScrollReveal delay="0.1s" variant="zoom-rotate">
+            <SocialLinks />
+          </ScrollReveal>
 
-        {/* Stats */}
-        <ScrollReveal delay="0.15s" variant="slide-left">
-          <StatsRow />
-        </ScrollReveal>
+          {/* Menu button below social buttons */}
+          <ScrollReveal delay="0.12s" variant="fade-up">
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="smooth-card w-full flex items-center justify-center gap-2 py-3 hover:bg-secondary/60 transition-colors"
+            >
+              <MenuIcon className="w-4 h-4 text-primary" />
+              <span className="text-xs font-semibold tracking-widest uppercase">Open Menu</span>
+            </button>
+          </ScrollReveal>
 
-        {/* Location map */}
-        <ScrollReveal delay="0.13s" variant="fade-up">
-          <LocationMap />
-        </ScrollReveal>
+          {/* Stats */}
+          <ScrollReveal delay="0.15s" variant="slide-left">
+            <StatsRow />
+          </ScrollReveal>
 
-        {/* Clock */}
-        <ScrollReveal delay="0.1s" variant="slide-right">
-          <LiveClock />
-        </ScrollReveal>
+          {/* Location map */}
+          <ScrollReveal delay="0.13s" variant="fade-up">
+            <LocationMap />
+          </ScrollReveal>
 
-        {/* Battery */}
-        <ScrollReveal delay="0.15s" variant="slide-left">
-          <BatteryIndicator />
-        </ScrollReveal>
+          {/* Contact / About */}
+          <ScrollReveal delay="0.15s" variant="slide-right">
+            <ContactCard />
+          </ScrollReveal>
+        </div>
 
         {/* Footer */}
         <ScrollReveal delay="0.2s" variant="fade-up">
           <footer className="text-center">
             <p className="text-xs text-muted-foreground">
-              © 2026 | Developed by: <span className="text-primary">​{settings?.name ?? "jmcruz"}</span>
+              © 2026 | Developed by: <span className="text-primary font-semibold">JM Cruz</span>
             </p>
           </footer>
         </ScrollReveal>
       </main>
-    </div>);
+    </div>
+  );
 };
 
 export default Index;
