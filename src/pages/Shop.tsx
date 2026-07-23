@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Moon, Sun, ShoppingBag, Gamepad2, Coffee, Hand } from "lucide-react";
+import { ArrowLeft, Moon, Sun, ShoppingBag, Gamepad2, Coffee, Hand, Wrench } from "lucide-react";
 import account1 from "@/assets/account1.jpg";
 import account2 from "@/assets/account2.jpg";
 import account3 from "@/assets/account3.jpg";
@@ -9,6 +9,7 @@ import account5 from "@/assets/account5.jpg";
 import account6 from "@/assets/account6.jpg";
 import coffeeMenu from "@/assets/coffee-menu.jpg";
 import fingersleeveImg from "@/assets/fingersleeve.jpeg";
+import abbysTools from "@/assets/abbys-tools.png";
 
 const accounts = [
   {
@@ -101,7 +102,7 @@ const coffeeItems = [
   { name: "Latte", price: 80, tag: "Classic" },
 ];
 
-type ShopTab = "mlbb" | "coffee" | "fingersleeve";
+type ShopTab = "mlbb" | "coffee" | "fingersleeve" | "apps";
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -127,9 +128,10 @@ const Shop = () => {
   const buildMessengerLink = (label: string, price: number) => `${messengerUrl}?ref=${encodeURIComponent(`Hi jmcruz, I want to buy ${label} for ₱${price}.`)}`;
 
   const tabs: { key: ShopTab; label: string; icon: React.ReactNode }[] = [
-    { key: "mlbb", label: "MLBB Account", icon: <Gamepad2 className="w-4 h-4" /> },
-    { key: "coffee", label: "Coffee Shop", icon: <Coffee className="w-4 h-4" /> },
-    { key: "fingersleeve", label: "Fingersleeve", icon: <Hand className="w-4 h-4" /> },
+    { key: "mlbb", label: "MLBB", icon: <Gamepad2 className="w-4 h-4" /> },
+    { key: "coffee", label: "Coffee", icon: <Coffee className="w-4 h-4" /> },
+    { key: "fingersleeve", label: "Sleeve", icon: <Hand className="w-4 h-4" /> },
+    { key: "apps", label: "Apps", icon: <Wrench className="w-4 h-4" /> },
   ];
 
   return (
@@ -330,6 +332,43 @@ const Shop = () => {
             </div>
           </div>
         )}
+
+        {/* Apps */}
+        {activeTab === "apps" && (
+          <div className="flex flex-col gap-4 animate-fade-up">
+            <div className="card-surface rounded-xl overflow-hidden">
+              <div className="p-4 flex items-center gap-4">
+                <img
+                  src={abbysTools}
+                  alt="Abby's Tools"
+                  className="w-20 h-20 object-contain rounded-xl bg-muted/50 p-2"
+                />
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-sm font-bold text-foreground">Abby's Tools</h3>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">
+                    Premium all-in-one tools APK. Payment first via GCash.
+                  </p>
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-lg font-bold text-primary">₱90</span>
+                    <button
+                      onClick={() => navigate("/buy/abbys-tools")}
+                      className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="px-4 pb-4">
+                <div className="rounded-lg bg-muted/40 px-3 py-2 text-[10px] text-muted-foreground">
+                  🔒 Secure order: pay via GCash, upload receipt, and get emailed the download.
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+
 
         {/* Footer */}
         <footer className="text-center animate-fade-up" style={{ animationDelay: "0.55s" }}>

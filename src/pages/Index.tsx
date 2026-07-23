@@ -97,14 +97,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Floating music (top-left) */}
-      <div className="fixed top-3 left-3 z-40 animate-fade-in">
+      {/* Floating music (bottom-right so it never overlaps the top nav) */}
+      <div className="fixed bottom-4 right-4 z-40 animate-fade-in">
         <MusicButton />
       </div>
 
       {/* Top nav */}
       <TopNav
-        onHome={() => scrollTo("home")}
         onProfile={() => scrollTo("profile")}
         onMenu={() => setMenuOpen(true)}
         isDark={isDark}

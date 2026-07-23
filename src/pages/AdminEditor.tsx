@@ -204,6 +204,11 @@ const AdminEditor = () => {
         {/* MEDIA: Highlights, Album, Notes */}
         <AdminMediaManager />
 
+        {/* ORDERS */}
+        <OrdersPanel />
+
+
+
         {/* PHRASES */}
         <Section
           title="Mga Quote / Phrases (typewriter)"
@@ -519,4 +524,109 @@ const CoverUploader = ({ value, onChange }: { value: string; onChange: (v: strin
   );
 };
 
+type OrderRow = {
+  id: string;
+  product_name: string;
+  price: number;
+  buyer_name: string;
+  buyer_email: string;
+  gcash_ref: string | null;
+  receipt_url: string;
+  status: string;
+  created_at: string;
+};
+
+const OrdersPanel = () => {
+  const [orders, setOrders] = useState<OrderRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [signedUrls, setSignedUrls] = useState<Record<string, string>>({});
+
+  const load = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) {
+      toast({ title: "Hindi ma-load ang orders", description: error.message, variant: "destructive" });
+    } else {
+      setOrders((data ?? []) as OrderRow[]);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const viewReceipt = async (path: string) => {
+    if (signedUrls[path]) {
+      window.open(signedUrls[path], "_blank");
+      return;
+    }
+    const { data, error } = await supabase.storage.from("receipts").createSignedUrl(path, 3600);
+    if (error || !data) {
+      toast({ title: "Error", description: error?.message ?? "Hindi mabuksan ang receipt", variant: "destructive" });
+      return;
+    }
+    setSignedUrls((s) => ({ ...s, [path]: data.signedUrl }));
+    window.open(data.signedUrl, "_blank");
+  };
+
+  const setStatus = async (id: string, status: string) => {
+    const { error } = await supabase.from("orders").update({ status }).eq("id", id);
+    if (error) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+      return;
+    }
+    setOrders((o) => o.map((x) => (x.id === id ? { ...x, status } : x)));
+  };
+
+  return (
+    <section className="liquid-panel p-4 mt-6">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-bold text-foreground">📦 Orders / Buyers</h2>
+        <button onClick={load} className="liquid-icon-button" title="Refresh">
+          <Loader2 className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
+        </button>
+      </div>
+      {orders.length === 0 && !loading && (
+        <p className="text-xs text-muted-foreground">Wala pang orders.</p>
+      )}
+      <div className="flex flex-col gap-2">
+        {orders.map((o) => (
+          <div key={o.id} className="rounded-xl border border-border/60 p-3 text-xs bg-card/60">
+            <div className="flex items-center justify-between mb-1">
+              <span className="font-semibold text-foreground">{o.product_name}</span>
+              <span className="text-primary font-bold">₱{Number(o.price).toFixed(0)}</span>
+            </div>
+            <div className="text-[11px] text-muted-foreground space-y-0.5">
+              <div><span className="text-foreground">{o.buyer_name}</span> · {o.buyer_email}</div>
+              {o.gcash_ref && <div>Ref: <span className="font-mono">{o.gcash_ref}</span></div>}
+              <div>{new Date(o.created_at).toLocaleString()}</div>
+            </div>
+            <div className="flex items-center gap-2 mt-2">
+              <button
+                onClick={() => viewReceipt(o.receipt_url)}
+                className="liquid-button px-3 py-1 text-[11px]"
+              >
+                View Receipt
+              </button>
+              <select
+                value={o.status}
+                onChange={(e) => setStatus(o.id, e.target.value)}
+                className="h-8 rounded-md border border-input bg-background px-2 text-[11px]"
+              >
+                <option value="pending">pending</option>
+                <option value="verified">verified</option>
+                <option value="delivered">delivered</option>
+                <option value="rejected">rejected</option>
+              </select>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
 export default AdminEditor;
+

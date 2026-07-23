@@ -7,6 +7,7 @@ import { MusicProvider } from "@/contexts/MusicContext";
 import Index from "./pages/Index.tsx";
 import Shop from "./pages/Shop.tsx";
 import Payment from "./pages/Payment.tsx";
+import BuyApp from "./pages/BuyApp.tsx";
 import DownloadApps from "./pages/DownloadApps.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminEditor from "./pages/AdminEditor.tsx";
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/shop" element={<Shop />} />
             <Route path="/downloads" element={<DownloadApps />} />
             <Route path="/payment/:id" element={<Payment />} />
+            <Route path="/buy/:productId" element={<BuyApp />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminEditor />} />
             <Route path="/chatgpt" element={<ChatGPTPro />} />
