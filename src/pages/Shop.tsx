@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Moon, Sun, ShoppingBag, Gamepad2, Coffee, Hand } from "lucide-react";
+import { ArrowLeft, Moon, Sun, ShoppingBag, Gamepad2, Coffee, Hand, Wrench } from "lucide-react";
 import account1 from "@/assets/account1.jpg";
 import account2 from "@/assets/account2.jpg";
 import account3 from "@/assets/account3.jpg";
@@ -9,6 +9,7 @@ import account5 from "@/assets/account5.jpg";
 import account6 from "@/assets/account6.jpg";
 import coffeeMenu from "@/assets/coffee-menu.jpg";
 import fingersleeveImg from "@/assets/fingersleeve.jpeg";
+import abbysTools from "@/assets/abbys-tools.png";
 
 const accounts = [
   {
@@ -101,7 +102,7 @@ const coffeeItems = [
   { name: "Latte", price: 80, tag: "Classic" },
 ];
 
-type ShopTab = "mlbb" | "coffee" | "fingersleeve";
+type ShopTab = "mlbb" | "coffee" | "fingersleeve" | "apps";
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -127,9 +128,10 @@ const Shop = () => {
   const buildMessengerLink = (label: string, price: number) => `${messengerUrl}?ref=${encodeURIComponent(`Hi jmcruz, I want to buy ${label} for ₱${price}.`)}`;
 
   const tabs: { key: ShopTab; label: string; icon: React.ReactNode }[] = [
-    { key: "mlbb", label: "MLBB Account", icon: <Gamepad2 className="w-4 h-4" /> },
-    { key: "coffee", label: "Coffee Shop", icon: <Coffee className="w-4 h-4" /> },
-    { key: "fingersleeve", label: "Fingersleeve", icon: <Hand className="w-4 h-4" /> },
+    { key: "mlbb", label: "MLBB", icon: <Gamepad2 className="w-4 h-4" /> },
+    { key: "coffee", label: "Coffee", icon: <Coffee className="w-4 h-4" /> },
+    { key: "fingersleeve", label: "Sleeve", icon: <Hand className="w-4 h-4" /> },
+    { key: "apps", label: "Apps", icon: <Wrench className="w-4 h-4" /> },
   ];
 
   return (
