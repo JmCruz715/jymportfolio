@@ -204,6 +204,11 @@ const AdminEditor = () => {
         {/* MEDIA: Highlights, Album, Notes */}
         <AdminMediaManager />
 
+        {/* ORDERS */}
+        <OrdersPanel />
+
+
+
         {/* PHRASES */}
         <Section
           title="Mga Quote / Phrases (typewriter)"
