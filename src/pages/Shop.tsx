@@ -333,6 +333,43 @@ const Shop = () => {
           </div>
         )}
 
+        {/* Apps */}
+        {activeTab === "apps" && (
+          <div className="flex flex-col gap-4 animate-fade-up">
+            <div className="card-surface rounded-xl overflow-hidden">
+              <div className="p-4 flex items-center gap-4">
+                <img
+                  src={abbysTools}
+                  alt="Abby's Tools"
+                  className="w-20 h-20 object-contain rounded-xl bg-muted/50 p-2"
+                />
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-sm font-bold text-foreground">Abby's Tools</h3>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">
+                    Premium all-in-one tools APK. Payment first via GCash.
+                  </p>
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-lg font-bold text-primary">₱90</span>
+                    <button
+                      onClick={() => navigate("/buy/abbys-tools")}
+                      className="liquid-button liquid-button-primary px-3 py-1.5 text-xs"
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="px-4 pb-4">
+                <div className="rounded-lg bg-muted/40 px-3 py-2 text-[10px] text-muted-foreground">
+                  🔒 Secure order: pay via GCash, upload receipt, and get emailed the download.
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+
+
         {/* Footer */}
         <footer className="text-center animate-fade-up" style={{ animationDelay: "0.55s" }}>
           <p className="text-xs text-muted-foreground">
