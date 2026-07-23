@@ -89,6 +89,42 @@ export type Database = {
         }
         Relationships: []
       }
+      orders: {
+        Row: {
+          buyer_email: string
+          buyer_name: string
+          created_at: string
+          gcash_ref: string | null
+          id: string
+          price: number
+          product_name: string
+          receipt_url: string
+          status: string
+        }
+        Insert: {
+          buyer_email: string
+          buyer_name: string
+          created_at?: string
+          gcash_ref?: string | null
+          id?: string
+          price: number
+          product_name: string
+          receipt_url: string
+          status?: string
+        }
+        Update: {
+          buyer_email?: string
+          buyer_name?: string
+          created_at?: string
+          gcash_ref?: string | null
+          id?: string
+          price?: number
+          product_name?: string
+          receipt_url?: string
+          status?: string
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           avatar_url: string
