@@ -1,21 +1,22 @@
-import { Home, User, Menu as MenuIcon, Moon, Sun } from "lucide-react";
+import { ShoppingBag, User, Menu as MenuIcon, Moon, Sun } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
-  onHome: () => void;
   onProfile: () => void;
   onMenu: () => void;
   isDark: boolean;
   onToggleTheme: () => void;
 }
 
-const TopNav = ({ onHome, onProfile, onMenu, isDark, onToggleTheme }: Props) => {
+const TopNav = ({ onProfile, onMenu, isDark, onToggleTheme }: Props) => {
+  const navigate = useNavigate();
   return (
     <div className="fixed top-3 left-1/2 -translate-x-1/2 z-40 w-[min(94vw,440px)]">
       <div className="smooth-card flex items-center justify-between px-2 py-1.5">
         <div className="flex items-center gap-1">
-          <button onClick={onHome} className="smooth-btn" aria-label="Home">
-            <Home className="w-4 h-4" />
-            <span className="hidden xs:inline text-xs font-semibold">Home</span>
+          <button onClick={() => navigate("/shop")} className="smooth-btn" aria-label="Shop">
+            <ShoppingBag className="w-4 h-4" />
+            <span className="hidden xs:inline text-xs font-semibold">Shop</span>
           </button>
           <button onClick={onProfile} className="smooth-btn" aria-label="Profile">
             <User className="w-4 h-4" />

@@ -15,11 +15,32 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
     const audio = new Audio("/audio/I_Wanna_Be_Yours.mp3");
     audio.loop = true;
     audio.volume = 0.6;
+    audio.preload = "auto";
+    (audio as any).playsInline = true;
     audioRef.current = audio;
-    audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+
+    const tryPlay = () =>
+      audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+
+    tryPlay();
+
+    // Mobile browsers block autoplay until a user gesture — unlock on first tap/scroll
+    const unlock = () => {
+      if (audio.paused) tryPlay();
+      window.removeEventListener("touchstart", unlock);
+      window.removeEventListener("click", unlock);
+      window.removeEventListener("scroll", unlock);
+    };
+    window.addEventListener("touchstart", unlock, { once: true, passive: true });
+    window.addEventListener("click", unlock, { once: true });
+    window.addEventListener("scroll", unlock, { once: true, passive: true });
+
     return () => {
       audio.pause();
       audioRef.current = null;
+      window.removeEventListener("touchstart", unlock);
+      window.removeEventListener("click", unlock);
+      window.removeEventListener("scroll", unlock);
     };
   }, []);
 
