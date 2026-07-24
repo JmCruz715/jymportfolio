@@ -124,81 +124,26 @@ const Profile = () => {
               </button>
             </div>
 
-            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
-              <button
-                onClick={() => { setMenuOpen(false); navigate("/shop"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3">
-                <ShoppingBag className="w-5 h-5 text-primary" />
-                <div className="min-w-0 text-left">
-                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Shop</p>
-                  <p className="text-[10px] text-muted-foreground mt-0.5">Visit my store</p>
-                </div>
-              </button>
-            </div>
-
-            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.15s", animationFillMode: "backwards" }}>
-              <button
-                onClick={() => { setMenuOpen(false); navigate("/downloads"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3"
-              >
-                <Download className="w-5 h-5 text-primary" />
-                <div className="min-w-0 text-left">
-                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Downloads</p>
-                  <p className="text-[10px] text-muted-foreground mt-0.5">Open the APK apps page</p>
-                </div>
-              </button>
-            </div>
-
-            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.17s", animationFillMode: "backwards" }}>
-              <button
-                onClick={() => { setMenuOpen(false); navigate("/chatgpt"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3"
-              >
-                <Bot className="w-5 h-5 text-primary" />
-                <div className="min-w-0 text-left">
-                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">ChatGPT Pro</p>
-                  <p className="text-[10px] text-muted-foreground mt-0.5">Magtanong sa AI assistant</p>
-                </div>
-              </button>
-            </div>
-
-            <div className="mb-4 animate-fade-in" style={{ animationDelay: "0.18s", animationFillMode: "backwards" }}>
-              <button
-                onClick={() => { setMenuOpen(false); navigate("/admin/login"); }}
-                className="liquid-button w-full justify-start gap-3 px-3 py-3"
-              >
-                <Lock className="w-5 h-5 text-primary" />
-                <div className="min-w-0 text-left">
-                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">Admin</p>
-                  <p className="text-[10px] text-muted-foreground mt-0.5">Edit profile, links & bio</p>
-                </div>
-              </button>
-            </div>
-
-            {(settings?.menu_sections?.length
-              ? settings.menu_sections
-              : [
-                  { title: "Tools", emoji: "🛠️", links: tools },
-                  { title: "Downloader", emoji: "⬇️", links: downloaders },
-                  {
-                    title: "Anime/Manga",
-                    emoji: "🎌",
-                    links: [
-                      { title: "AnimeHaven", description: "Premium anime streaming", href: "https://animehaven-next.vercel.app/" },
-                      { title: "GlobalComix Manga", description: "Browse manga online", href: "https://globalcomix.com/browse/manga" },
-                    ],
-                  },
-                ]
-            ).map((section, i) => (
-              <MenuSection
-                key={section.title}
-                title={section.title}
-                emoji={section.emoji}
-                count={section.links.length}
-                links={section.links}
-                delay={`${0.2 + i * 0.1}s`}
-              />
-            ))}
+            <ul className="flex flex-col gap-1 text-sm">
+              {[
+                { label: "Dashboard", onClick: () => navigate("/") },
+                { label: "About", onClick: () => { setMenuOpen(false); document.getElementById("profile")?.scrollIntoView({ behavior: "smooth" }); } },
+                { label: "Contact", onClick: () => (window.location.href = "https://m.me/jm.born67") },
+                { label: "Feedback", onClick: () => (window.location.href = "mailto:kaizenjym12@gmail.com?subject=Feedback") },
+                { label: "Privacy Policy", onClick: () => navigate("/privacy") },
+                { label: "Terms of Service", onClick: () => navigate("/terms") },
+                { label: "Admin", onClick: () => navigate("/admin/login") },
+              ].map((item) => (
+                <li key={item.label}>
+                  <button
+                    onClick={() => { setMenuOpen(false); item.onClick(); }}
+                    className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-secondary transition text-xs font-semibold uppercase tracking-wide"
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
 
             <div className="mt-6 animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "backwards" }}>
               <div className="liquid-panel px-4 py-4">
