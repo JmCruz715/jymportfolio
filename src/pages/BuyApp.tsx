@@ -1,9 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Copy, Check, ShieldCheck, Upload, Loader2, Send } from "lucide-react";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import abbysTools from "@/assets/abbys-tools.png";
+
+const orderSchema = z.object({
+  buyerName: z.string().trim().min(1, "Pangalan ay required").max(80),
+  buyerEmail: z.string().trim().email("Invalid email").max(120),
+  gcashRef: z.string().trim().max(64).optional().or(z.literal("")),
+});
+
+const ALLOWED_MIME = ["image/jpeg", "image/png", "image/webp", "image/heic"];
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+
 
 type Product = {
   id: string;
@@ -67,8 +78,21 @@ const BuyApp = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!buyerName.trim() || !buyerEmail.trim() || !receipt) {
-      toast({ title: "Kulang pa", description: "Punan lahat ng fields at i-upload ang receipt.", variant: "destructive" });
+    const parsed = orderSchema.safeParse({ buyerName, buyerEmail, gcashRef });
+    if (!parsed.success) {
+      toast({ title: "Kulang o mali", description: parsed.error.issues[0]?.message ?? "Ayusin ang form.", variant: "destructive" });
+      return;
+    }
+    if (!receipt) {
+      toast({ title: "Kulang pa", description: "I-upload ang receipt.", variant: "destructive" });
+      return;
+    }
+    if (!ALLOWED_MIME.includes(receipt.type)) {
+      toast({ title: "Hindi allowed", description: "JPG/PNG/WEBP lang.", variant: "destructive" });
+      return;
+    }
+    if (receipt.size > MAX_FILE_BYTES) {
+      toast({ title: "Sobrang laki", description: "Max 5MB ang receipt.", variant: "destructive" });
       return;
     }
     setSubmitting(true);
