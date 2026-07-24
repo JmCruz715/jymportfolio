@@ -1,54 +1,57 @@
+## Goal
+Turn the Shop page into the new Main Dashboard, simplify navigation, redesign the Open Menu as secondary-only, and fix the 8 security findings.
 
-# Portfolio Upgrade Plan
+## 1. Main Dashboard (was `/shop` → becomes `/`)
+Rebuild `src/pages/Shop.tsx` into a real dashboard and route it at `/`. Move the current portfolio page to `/profile`.
 
-## 1. New Navigation (replaces hamburger)
-Add a top navigation with **3 buttons**: `Home` · `Profile` · `Menu`.
-- Home → scrolls to top / hero
-- Profile → scrolls to profile card + map + contact area
-- Menu → opens the slide-out (same content as current hamburger: Shop, Downloads, ChatGPT, Admin, Tools, Downloader, Anime/Manga)
-- Remove the 3-line hamburger icon; keep dark/light toggle
-- Move "Tools / Downloader / Anime/Manga" sections into this Menu drawer only (already there — just ensure they stay).
+Sections (card grid, dark theme with blue/purple accents):
+- **Quick Access** row: Profile, ChatGPT Pro, Shop items, Admin
+- **Featured Apps**: Abby's Tools (buy flow preserved)
+- **APK Downloads**: CapCut Premium, GameBase (from current DownloadApps page)
+- **Tools & Downloaders**: cards for the tools/downloaders lists currently in the Open Menu
+- **Anime/Manga**: AnimeHaven, GlobalComix
+- **Latest Updates**: pulled from `notes` table (fallback static)
 
-## 2. Status Strip (top of home)
-A single sleek bar under the nav showing live info:
-- 🕐 Digital time (PHT)
-- 🔋 Battery %
-- 📶 Network speed (ping in ms, using a lightweight fetch-timing ping every ~10s)
-- ✍️ "Developed by JM Cruz"
+Responsive grid (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`), lazy `<img loading="lazy">`, framer-style CSS transitions already in `index.css`.
 
-Replace the separate LiveClock + BatteryIndicator cards further down with this unified strip.
+## 2. Navigation
+Simplify `TopNav`:
+- Buttons: **Dashboard** (/) , **Profile** (/profile), **Menu**, theme toggle
+- Remove duplicate Shop button (Shop lives inside dashboard now)
 
-## 3. Profile Section Reorg
-- Move the **LocationMap** up next to the profile (right under ProfileCard / social links area)
-- Add a **Contact / About** panel near the profile buttons (About text + Messenger + email/contact link)
-- Remove the standalone "My Websites" section from the homepage
-- Social buttons stay; the Menu button sits **below the social buttons** as requested
+## 3. Open Menu (secondary only)
+Reduce the sidebar in the new dashboard + profile page to:
+- Settings (theme toggle info)
+- About
+- Contact
+- Feedback (mailto)
+- Privacy Policy (new `/privacy` route, simple static)
+- Terms of Service (new `/terms` route, simple static)
+- Admin login link
 
-## 4. Verified Badge Upgrade
-Redesign the blue check into a **realistic Meta/Facebook-style badge**:
-- Layered gradient blue (#1877F2 → #0866FF)
-- Scalloped/star outline shape (SVG path) instead of a plain circle
-- Soft inner highlight + drop shadow
-- White stroked check
+Remove Tools/Downloaders/Anime blocks from the menu (they now live on the dashboard).
 
-## 5. Visual Style: "smoother, less liquid glass"
-- Reduce heavy backdrop-blur / glass borders on home buttons
-- Use softer solid surfaces with subtle shadow + smooth hover transitions
-- Keep dark/light theme toggle working
-- Applies to: nav buttons, status strip, section cards
+## 4. Security — fix 8 findings
+Run `security--get_scan_results`, then address each:
+- Tighten RLS/GRANTs on public tables where over-permissive
+- Add zod validation on `BuyApp` form and any user-input surfaces
+- Remove any client-exposed secrets/logs
+- Sanitize note/highlight text render (no `dangerouslySetInnerHTML`)
+- Add email HIBP if flagged
+- Any linter warnings from `supabase--linter`
 
-## 6. Bio Cleanup
-- Remove any AI-related text/mentions from the public bio area (keep AI only inside admin dashboard)
+Report each finding + fix; call `manage_security_finding` mark_as_fixed with explanation.
 
-## Technical Notes
-- New components: `TopNav.tsx` (Home/Profile/Menu), `StatusStrip.tsx` (time/battery/ping/credit), updated `ProfileCard` badge SVG
-- Ping: `performance.now()` around a `fetch('/favicon.ico?_=' + Date.now(), {cache:'no-store'})` every 10s
-- Section anchors: `#home`, `#profile` with smooth-scroll
-- Delete `<WebsitesSection />` usage from `Index.tsx` (component file kept for admin)
-- Remove `LiveClock` + `BatteryIndicator` usages from Index (folded into StatusStrip)
-- Move `LocationMap` up in the flow; add new `ContactCard.tsx` for About/Contact
-- Keep all existing menu drawer contents intact under the new "Menu" button
+## 5. UI/UX polish
+- Dark theme tokens already exist; add blue/purple accent gradient utility in `index.css`
+- Cards use `smooth-card` with hover lift
+- Consistent lucide icons
+- `loading="lazy"` on all images
+- Keep animations subtle (existing `ScrollReveal`)
 
-## Out of Scope (confirm if wanted)
-- Actual internet speed test (Mbps) — using ping (ms) instead since real speed test needs a large download
-- Changing admin editor
+## Technical notes
+- New routes: `/` (Dashboard), `/profile` (current Index), `/privacy`, `/terms`
+- Files touched: `src/App.tsx`, `src/pages/Shop.tsx` (→ Dashboard), `src/pages/Index.tsx` (→ Profile), `src/components/TopNav.tsx`, new `src/pages/Privacy.tsx`, `src/pages/Terms.tsx`, `src/pages/BuyApp.tsx` (add zod), `src/index.css` (accent gradient)
+- DB migrations only if security scan requires
+
+Ready to build on approval.
