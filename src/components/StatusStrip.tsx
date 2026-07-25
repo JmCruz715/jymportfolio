@@ -114,7 +114,7 @@ const StatusStrip = () => {
       </div>
       <div className="mt-2 pt-2 border-t border-border/50 flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground">
         <Code2 className="w-3 h-3 text-primary" />
-        Developed by <span className="text-primary font-semibold">JM Cruz</span>
+        Developed by <span className="text-primary font-semibold">Kaizen</span>
       </div>
     </div>
   );

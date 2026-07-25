@@ -15,7 +15,7 @@ const Privacy = () => {
             <h1 className="text-2xl font-bold">Privacy Policy</h1>
           </div>
           <p className="text-sm text-muted-foreground mb-4">
-            This page is maintained by JM Cruz to answer common privacy questions about this site.
+            This page is maintained by Kaizen to answer common privacy questions about this site.
           </p>
           <div className="space-y-4 text-sm leading-6 text-foreground/90">
             <section>
