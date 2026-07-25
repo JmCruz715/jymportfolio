@@ -38,7 +38,7 @@ const PRODUCTS: Record<string, Product> = {
 };
 
 const GCASH_NUMBER = "09938588474";
-const GCASH_NAME = "JM Cruz";
+const GCASH_NAME = "John Lorence T.";
 
 const BuyApp = () => {
   const navigate = useNavigate();
