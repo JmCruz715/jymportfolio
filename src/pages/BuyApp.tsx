@@ -105,21 +105,22 @@ const BuyApp = () => {
         .upload(path, receipt, { upsert: false });
       if (upErr) throw upErr;
 
-      const { data: orderData, error: dbErr } = await supabase
+      const newOrderId = (globalThis.crypto as any)?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const { error: dbErr } = await supabase
         .from("orders")
         .insert({
+          id: newOrderId,
           product_name: product.name,
           price: product.price,
           buyer_name: buyerName.trim(),
           buyer_email: buyerEmail.trim(),
           gcash_ref: gcashRef.trim() || null,
           receipt_url: path,
-        })
-        .select("id")
-        .single();
+        });
       if (dbErr) throw dbErr;
 
-      setOrderId(orderData.id);
+      setOrderId(newOrderId);
+
       toast({
         title: "Salamat! Order received.",
         description: "Ico-confirm namin agad pagkatapos ma-verify ang bayad.",
