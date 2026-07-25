@@ -152,7 +152,7 @@ const Profile = () => {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.24em]">About</p>
                 </div>
                 <p className="text-xs leading-6 text-muted-foreground">
-                  {settings?.bio ?? "jmcruz — clean tools, curated links, shop drops, and anime picks in one smooth space."}
+                  {settings?.bio ?? "Kaizen — clean tools, curated links, shop drops, and anime picks in one smooth space."}
                 </p>
               </div>
             </div>
@@ -210,7 +210,7 @@ const Profile = () => {
         <ScrollReveal delay="0.2s" variant="fade-up">
           <footer className="text-center">
             <p className="text-xs text-muted-foreground">
-              © 2026 | Developed by: <span className="text-primary font-semibold">JM Cruz</span>
+              © 2026 | Developed by: <span className="text-primary font-semibold">Kaizen</span>
             </p>
           </footer>
         </ScrollReveal>

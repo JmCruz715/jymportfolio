@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  User, ShoppingBag, Download, Bot, Wrench, Gamepad2, Coffee, Hand,
-  Sparkles, Newspaper, Moon, Sun, Menu as MenuIcon, X,
+  User, ShoppingBag, Download, Bot, Wrench,
+  Sparkles, Moon, Sun, Menu as MenuIcon, X,
   ExternalLink, Film, BookOpen, Shield, FileText, Mail, Info, Lock, Zap,
 } from "lucide-react";
 import MusicButton from "@/components/MusicButton";
@@ -62,7 +62,7 @@ const Dashboard = () => {
             <div className="w-8 h-8 rounded-lg bg-gradient-accent grid place-items-center shadow-glow">
               <Zap className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold tracking-tight text-sm sm:text-base">jmcruz<span className="text-primary">.</span></span>
+            <span className="font-bold tracking-tight text-sm sm:text-base">Kaizen<span className="text-primary">.</span></span>
           </div>
           <nav className="flex items-center gap-1">
             <button onClick={() => navigate("/profile")} className="smooth-btn text-xs sm:text-sm">
@@ -110,7 +110,7 @@ const Dashboard = () => {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-[10px] text-muted-foreground text-center">© 2026 jmcruz</p>
+            <p className="mt-6 text-[10px] text-muted-foreground text-center">© 2026 Kaizen</p>
           </aside>
         </div>
       )}
@@ -124,7 +124,7 @@ const Dashboard = () => {
               <Sparkles className="w-3 h-3" /> Dashboard
             </span>
             <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-2">
-              Welcome to <span className="text-gradient-accent">jmcruz</span>
+              Welcome to <span className="text-gradient-accent">Kaizen</span>
             </h1>
             <p className="text-sm text-muted-foreground max-w-md">
               Central hub for APKs, tools, apps to buy, and the portfolio. Everything, one tap away.
@@ -144,7 +144,7 @@ const Dashboard = () => {
         </div>
 
         {/* Featured Apps */}
-        <SectionTitle title="Featured Apps" subtitle="Premium products from jmcruz" />
+        <SectionTitle title="Featured Apps" subtitle="Premium products from Kaizen" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <FeaturedCard
             image={abbysTools}
@@ -153,20 +153,6 @@ const Dashboard = () => {
             price="₱90"
             cta="Buy Now"
             onClick={() => navigate("/buy/abbys-tools")}
-          />
-          <QuickBigCard
-            icon={Gamepad2}
-            title="MLBB Accounts"
-            desc="Mythic ranks, ready to use. Chat via Messenger."
-            cta="Browse"
-            onClick={() => navigate("/shop")}
-          />
-          <QuickBigCard
-            icon={Coffee}
-            title="Coffee & Sleeve"
-            desc="Coffee menu + gaming fingersleeve deals."
-            cta="Open Shop"
-            onClick={() => navigate("/shop")}
           />
         </div>
 
@@ -230,7 +216,7 @@ const Dashboard = () => {
         )}
 
         <footer className="text-center py-6 text-xs text-muted-foreground">
-          © 2026 · Developed by <span className="text-primary font-semibold">JM Cruz</span>
+          © 2026 · Developed by <span className="text-primary font-semibold">Kaizen</span>
         </footer>
       </main>
     </div>

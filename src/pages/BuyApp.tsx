@@ -31,7 +31,7 @@ const PRODUCTS: Record<string, Product> = {
     name: "Abby's Tools",
     price: 90,
     image: abbysTools,
-    description: "Premium all-in-one tools APK by jmcruz.",
+    description: "Premium all-in-one tools APK by Kaizen.",
     downloadUrl:
       "https://www.mediafire.com/file/8ympnzbfw0gc2hu/Abby%2527s_tools.apks/file",
   },

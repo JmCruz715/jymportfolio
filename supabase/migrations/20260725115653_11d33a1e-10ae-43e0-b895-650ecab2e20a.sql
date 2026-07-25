@@ -1,0 +1,1 @@
+UPDATE public.site_settings SET name = 'Kaizen', bio = 'Kaizen builds clean tools, curated links, shop drops, and anime picks in one smooth liquid-glass space.' WHERE id = '66884b94-fb1e-4e21-8dc2-26333957a888';
