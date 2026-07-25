@@ -125,7 +125,7 @@ const Shop = () => {
   }, [isDark]);
 
   const messengerUrl = "https://m.me/jm.born67";
-  const buildMessengerLink = (label: string, price: number) => `${messengerUrl}?ref=${encodeURIComponent(`Hi jmcruz, I want to buy ${label} for ₱${price}.`)}`;
+  const buildMessengerLink = (label: string, price: number) => `${messengerUrl}?ref=${encodeURIComponent(`Hi Kaizen, I want to buy ${label} for ₱${price}.`)}`;
 
   const tabs: { key: ShopTab; label: string; icon: React.ReactNode }[] = [
     { key: "mlbb", label: "MLBB", icon: <Gamepad2 className="w-4 h-4" /> },
@@ -159,7 +159,7 @@ const Shop = () => {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-3">
             <ShoppingBag className="w-7 h-7 text-primary" />
           </div>
-          <h1 className="text-xl font-bold text-foreground tracking-tight">jmcruz Shop</h1>
+          <h1 className="text-xl font-bold text-foreground tracking-tight">Kaizen Shop</h1>
           <p className="text-xs text-muted-foreground mt-1">Premium products for sale</p>
         </div>
 
@@ -373,7 +373,7 @@ const Shop = () => {
         {/* Footer */}
         <footer className="text-center animate-fade-up" style={{ animationDelay: "0.55s" }}>
           <p className="text-xs text-muted-foreground">
-            © 2026 | Developed by: <span className="text-primary">jmcruz</span>
+            © 2026 | Developed by: <span className="text-primary">Kaizen</span>
           </p>
         </footer>
       </main>

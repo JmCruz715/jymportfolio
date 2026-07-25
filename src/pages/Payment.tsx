@@ -135,7 +135,7 @@ const Payment = () => {
         {/* Footer */}
         <footer className="text-center animate-fade-up" style={{ animationDelay: "0.4s" }}>
           <p className="text-xs text-muted-foreground">
-            © 2026 | Developed by: <span className="text-primary">jmcruz</span>
+            © 2026 | Developed by: <span className="text-primary">Kaizen</span>
           </p>
         </footer>
       </main>
