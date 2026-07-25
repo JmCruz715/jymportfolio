@@ -152,7 +152,7 @@ const Profile = () => {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.24em]">About</p>
                 </div>
                 <p className="text-xs leading-6 text-muted-foreground">
-                  {settings?.bio ?? "jmcruz — clean tools, curated links, shop drops, and anime picks in one smooth space."}
+                  {settings?.bio ?? "Kaizen — clean tools, curated links, shop drops, and anime picks in one smooth space."}
                 </p>
               </div>
             </div>

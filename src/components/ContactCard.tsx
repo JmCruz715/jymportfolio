@@ -5,7 +5,7 @@ const ContactCard = () => {
   const { settings } = useSiteSettings();
   const bio =
     settings?.bio ??
-    "jmcruz builds clean tools, curated links, shop drops, and anime picks in one smooth space.";
+    "Kaizen builds clean tools, curated links, shop drops, and anime picks in one smooth space.";
 
   return (
     <div className="smooth-card p-4 animate-fade-up">
