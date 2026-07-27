@@ -536,10 +536,13 @@ type OrderRow = {
   created_at: string;
 };
 
+const STATUSES = ["all", "pending", "verified", "delivered", "rejected"] as const;
+
 const OrdersPanel = () => {
   const [orders, setOrders] = useState<OrderRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [signedUrls, setSignedUrls] = useState<Record<string, string>>({});
+  const [filter, setFilter] = useState<string>("all");
 
   const load = async () => {
     setLoading(true);
@@ -557,19 +560,21 @@ const OrdersPanel = () => {
 
   useEffect(() => { load(); }, []);
 
-  const viewReceipt = async (path: string) => {
-    if (signedUrls[path]) {
-      window.open(signedUrls[path], "_blank");
-      return;
-    }
-    const { data, error } = await supabase.storage.from("receipts").createSignedUrl(path, 3600);
-    if (error || !data) {
-      toast({ title: "Error", description: error?.message ?? "Hindi mabuksan ang receipt", variant: "destructive" });
-      return;
-    }
-    setSignedUrls((s) => ({ ...s, [path]: data.signedUrl }));
-    window.open(data.signedUrl, "_blank");
-  };
+  // Pre-sign every receipt so admin sees thumbnails right away
+  useEffect(() => {
+    const missing = orders.map((o) => o.receipt_url).filter((p) => p && !signedUrls[p]);
+    if (missing.length === 0) return;
+    (async () => {
+      const { data } = await supabase.storage.from("receipts").createSignedUrls(missing, 3600);
+      if (!data) return;
+      setSignedUrls((s) => {
+        const next = { ...s };
+        data.forEach((d) => { if (d.signedUrl && d.path) next[d.path] = d.signedUrl; });
+        return next;
+      });
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orders]);
 
   const setStatus = async (id: string, status: string) => {
     const { error } = await supabase.from("orders").update({ status }).eq("id", id);
@@ -578,55 +583,120 @@ const OrdersPanel = () => {
       return;
     }
     setOrders((o) => o.map((x) => (x.id === id ? { ...x, status } : x)));
+    toast({ title: `Order marked ${status}` });
   };
+
+  const shown = filter === "all" ? orders : orders.filter((o) => o.status === filter);
+  const pendingCount = orders.filter((o) => o.status === "pending").length;
+  const revenue = orders
+    .filter((o) => o.status === "verified" || o.status === "delivered")
+    .reduce((s, o) => s + Number(o.price), 0);
+
+  const badge = (s: string) =>
+    s === "verified" ? "bg-primary/20 text-primary"
+    : s === "delivered" ? "bg-green-500/20 text-green-400"
+    : s === "rejected" ? "bg-destructive/20 text-destructive"
+    : "bg-yellow-500/20 text-yellow-400";
 
   return (
     <section className="liquid-panel p-4 mt-6">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-sm font-bold text-foreground">📦 Orders / Buyers</h2>
+        <h2 className="text-sm font-bold text-foreground">🧾 Receipts / Orders</h2>
         <button onClick={load} className="liquid-icon-button" title="Refresh">
           <Loader2 className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
-      {orders.length === 0 && !loading && (
-        <p className="text-xs text-muted-foreground">Wala pang orders.</p>
-      )}
-      <div className="flex flex-col gap-2">
-        {orders.map((o) => (
-          <div key={o.id} className="rounded-xl border border-border/60 p-3 text-xs bg-card/60">
-            <div className="flex items-center justify-between mb-1">
-              <span className="font-semibold text-foreground">{o.product_name}</span>
-              <span className="text-primary font-bold">₱{Number(o.price).toFixed(0)}</span>
-            </div>
-            <div className="text-[11px] text-muted-foreground space-y-0.5">
-              <div><span className="text-foreground">{o.buyer_name}</span> · {o.buyer_email}</div>
-              {o.gcash_ref && <div>Ref: <span className="font-mono">{o.gcash_ref}</span></div>}
-              <div>{new Date(o.created_at).toLocaleString()}</div>
-            </div>
-            <div className="flex items-center gap-2 mt-2">
-              <button
-                onClick={() => viewReceipt(o.receipt_url)}
-                className="liquid-button px-3 py-1 text-[11px]"
-              >
-                View Receipt
-              </button>
-              <select
-                value={o.status}
-                onChange={(e) => setStatus(o.id, e.target.value)}
-                className="h-8 rounded-md border border-input bg-background px-2 text-[11px]"
-              >
-                <option value="pending">pending</option>
-                <option value="verified">verified</option>
-                <option value="delivered">delivered</option>
-                <option value="rejected">rejected</option>
-              </select>
-            </div>
-          </div>
+
+      <div className="grid grid-cols-3 gap-2 mb-3">
+        <div className="rounded-xl border border-border/60 bg-card/60 p-2 text-center">
+          <div className="text-base font-bold text-foreground">{orders.length}</div>
+          <div className="text-[10px] text-muted-foreground">Total</div>
+        </div>
+        <div className="rounded-xl border border-border/60 bg-card/60 p-2 text-center">
+          <div className="text-base font-bold text-yellow-400">{pendingCount}</div>
+          <div className="text-[10px] text-muted-foreground">Pending</div>
+        </div>
+        <div className="rounded-xl border border-border/60 bg-card/60 p-2 text-center">
+          <div className="text-base font-bold text-primary">₱{revenue.toFixed(0)}</div>
+          <div className="text-[10px] text-muted-foreground">Confirmed</div>
+        </div>
+      </div>
+
+      <div className="flex gap-1.5 overflow-x-auto mb-3">
+        {STATUSES.map((s) => (
+          <button
+            key={s}
+            onClick={() => setFilter(s)}
+            className={`shrink-0 px-3 py-1 rounded-full text-[11px] border transition-colors ${
+              filter === s ? "bg-primary text-primary-foreground border-primary" : "border-border/60 text-muted-foreground"
+            }`}
+          >
+            {s}
+          </button>
         ))}
+      </div>
+
+      {shown.length === 0 && !loading && (
+        <p className="text-xs text-muted-foreground">Wala pang receipt dito.</p>
+      )}
+
+      <div className="flex flex-col gap-2">
+        {shown.map((o) => {
+          const url = signedUrls[o.receipt_url];
+          return (
+            <div key={o.id} className="rounded-xl border border-border/60 p-3 text-xs bg-card/60">
+              <div className="flex gap-3">
+                <button
+                  onClick={() => url && window.open(url, "_blank")}
+                  className="w-16 h-16 shrink-0 rounded-lg overflow-hidden border border-border/60 bg-muted flex items-center justify-center"
+                  title="Buksan ang receipt"
+                >
+                  {url
+                    ? <img src={url} alt={`Receipt ni ${o.buyer_name}`} className="w-full h-full object-cover" />
+                    : <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />}
+                </button>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-semibold text-foreground truncate">{o.product_name}</span>
+                    <span className="text-primary font-bold">₱{Number(o.price).toFixed(0)}</span>
+                  </div>
+                  <div className="text-[11px] text-muted-foreground space-y-0.5 mt-0.5">
+                    <div className="truncate"><span className="text-foreground">{o.buyer_name}</span> · {o.buyer_email}</div>
+                    {o.gcash_ref && <div>Ref: <span className="font-mono">{o.gcash_ref}</span></div>}
+                    <div>{new Date(o.created_at).toLocaleString()}</div>
+                  </div>
+                  <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${badge(o.status)}`}>
+                    {o.status}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 mt-2">
+                <button
+                  onClick={() => url && window.open(url, "_blank")}
+                  disabled={!url}
+                  className="liquid-button px-3 py-1 text-[11px] disabled:opacity-50"
+                >
+                  View Receipt
+                </button>
+                <select
+                  value={o.status}
+                  onChange={(e) => setStatus(o.id, e.target.value)}
+                  className="h-8 rounded-md border border-input bg-background px-2 text-[11px]"
+                >
+                  <option value="pending">pending</option>
+                  <option value="verified">verified</option>
+                  <option value="delivered">delivered</option>
+                  <option value="rejected">rejected</option>
+                </select>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 };
+
 
 export default AdminEditor;
 
