@@ -10,6 +10,7 @@ import LocationMap from "@/components/LocationMap";
 import TopNav from "@/components/TopNav";
 import StatusStrip from "@/components/StatusStrip";
 import ContactCard from "@/components/ContactCard";
+import MusicNote from "@/components/MusicNote";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const tools = [
@@ -188,6 +189,11 @@ const Profile = () => {
               <MenuIcon className="w-4 h-4 text-primary" />
               <span className="text-xs font-semibold tracking-widest uppercase">Open Menu</span>
             </button>
+          </ScrollReveal>
+
+          {/* Music note (Messenger style) */}
+          <ScrollReveal delay="0.14s" variant="scale">
+            <MusicNote />
           </ScrollReveal>
 
           {/* Stats */}

@@ -1,5 +1,5 @@
 import { Check, Camera } from "lucide-react";
-import VerifiedBadge from "@/components/VerifiedBadge";
+import NameBanner from "@/components/NameBanner";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
@@ -104,10 +104,10 @@ const ProfileCard = () => {
       </div>
 
       <div className="text-center mt-3">
-        <h1 className="text-2xl font-bold text-foreground flex items-center justify-center gap-1.5 leading-tight animate-fade-up" style={{ animationDelay: "0.25s" }}>
-          {settings?.name ?? "..."}
-          <VerifiedBadge size={20} className="shrink-0 drop-shadow" />
-        </h1>
+        <div className="animate-fade-up" style={{ animationDelay: "0.25s" }}>
+          <h1 className="sr-only">{settings?.name ?? "Profile"}</h1>
+          <NameBanner name={settings?.name ?? "..."} />
+        </div>
         <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mt-1.5 animate-fade-up" style={{ animationDelay: "0.35s" }}>
           {settings?.role_label ?? "Developer"}
         </p>
