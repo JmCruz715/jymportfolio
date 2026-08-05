@@ -9,6 +9,7 @@ import MusicButton from "@/components/MusicButton";
 import capcutLogo from "@/assets/capcut-logo.png";
 import gamebaseCover from "@/assets/gamebase-cover.jpeg";
 import abbysTools from "@/assets/abbys-tools.png";
+import heroBanner from "@/assets/hero-banner.mp4.asset.json";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 // Static links (kept minimal; moved from Open Menu into the Dashboard)
@@ -119,7 +120,16 @@ const Dashboard = () => {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex flex-col gap-10">
         {/* Hero */}
         <section className="relative overflow-hidden rounded-3xl border border-border bg-gradient-hero p-6 sm:p-10 animate-fade-up">
-          <div className="max-w-2xl">
+          <video
+            src={heroBanner.url}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent pointer-events-none" />
+          <div className="relative max-w-2xl">
             <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest text-primary bg-primary/10 rounded-full px-2 py-1 mb-3">
               <Sparkles className="w-3 h-3" /> Dashboard
             </span>
