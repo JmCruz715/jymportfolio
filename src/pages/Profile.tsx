@@ -10,7 +10,6 @@ import LocationMap from "@/components/LocationMap";
 import TopNav from "@/components/TopNav";
 import StatusStrip from "@/components/StatusStrip";
 import ContactCard from "@/components/ContactCard";
-import MusicNote from "@/components/MusicNote";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const tools = [
