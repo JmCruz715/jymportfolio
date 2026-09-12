@@ -190,11 +190,6 @@ const Profile = () => {
             </button>
           </ScrollReveal>
 
-          {/* Music note (Messenger style) */}
-          <ScrollReveal delay="0.14s" variant="scale">
-            <MusicNote />
-          </ScrollReveal>
-
           {/* Stats */}
           <ScrollReveal delay="0.15s" variant="slide-left">
             <StatsRow />
