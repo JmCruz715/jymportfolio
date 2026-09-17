@@ -168,7 +168,9 @@ const AdminEditor = () => {
               className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-primary/40 bg-card group"
             >
               {avatarUrl && (
-                <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />
+                isVideoUrl(avatarUrl)
+                  ? <video src={avatarUrl} className="w-full h-full object-cover" autoPlay loop muted playsInline />
+                  : <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />
               )}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 {uploading ? (
@@ -184,11 +186,11 @@ const AdminEditor = () => {
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/*"
+              accept="image/*,image/gif,video/*"
               className="hidden"
               onChange={onAvatarFile}
             />
-            <p className="text-[10px] text-muted-foreground">Pindutin ang larawan para palitan</p>
+            <p className="text-[10px] text-muted-foreground">Pindutin para palitan — pwede photo, GIF, o video</p>
           </div>
 
           {/* Cover photo uploader */}
@@ -509,17 +511,21 @@ const CoverUploader = ({ value, onChange }: { value: string; onChange: (v: strin
         disabled={busy}
         className="relative w-full h-32 rounded-xl overflow-hidden border-2 border-primary/40 bg-card group"
       >
-        {value && <img src={value} alt="cover" className="w-full h-full object-cover" />}
+        {value && (
+          isVideoUrl(value)
+            ? <video src={value} className="w-full h-full object-cover" autoPlay loop muted playsInline />
+            : <img src={value} alt="cover" className="w-full h-full object-cover" />
+        )}
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
           {busy ? <Loader2 className="w-7 h-7 text-white animate-spin" /> : <Camera className="w-7 h-7 text-white" />}
         </div>
         {!value && (
           <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground">
-            Pindutin para mag-upload ng cover
+            Pindutin para mag-upload ng cover (photo, GIF, o video)
           </div>
         )}
       </button>
-      <input ref={inputRef} type="file" accept="image/*" hidden onChange={onFile} />
+      <input ref={inputRef} type="file" accept="image/*,image/gif,video/*" hidden onChange={onFile} />
     </div>
   );
 };
