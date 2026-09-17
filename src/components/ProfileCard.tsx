@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { useAdmin } from "@/hooks/useAdmin";
+import { isVideoUrl } from "@/lib/utils";
 
 const ProfileCard = () => {
   const { settings } = useSiteSettings();
@@ -58,7 +59,11 @@ const ProfileCard = () => {
       {/* Cover photo (Facebook style) */}
       <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/30 via-purple-500/20 to-pink-500/30 border border-border/40">
         {cover ? (
-          <img src={cover} alt="cover" className="w-full h-full object-cover" />
+          isVideoUrl(cover) ? (
+            <video src={cover} className="w-full h-full object-cover" autoPlay loop muted playsInline />
+          ) : (
+            <img src={cover} alt="cover" className="w-full h-full object-cover" />
+          )
         ) : (
           <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">
             {isAdmin ? "Mag-add ng cover photo sa admin" : ""}
@@ -84,11 +89,22 @@ const ProfileCard = () => {
           }}
         />
         <div className="w-28 h-28 rounded-full p-[3px] bg-gradient-to-br from-primary to-pink-400 relative">
-          <img
-            alt={settings?.name ?? "profile"}
-            className="w-full h-full rounded-full object-cover bg-card"
-            src={settings?.avatar_url ?? "/lovable-uploads/f77014f9-190b-49ff-902d-3d1981b8391e.jpg"}
-          />
+          {isVideoUrl(settings?.avatar_url) ? (
+            <video
+              src={settings?.avatar_url}
+              className="w-full h-full rounded-full object-cover bg-card"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          ) : (
+            <img
+              alt={settings?.name ?? "profile"}
+              className="w-full h-full rounded-full object-cover bg-card"
+              src={settings?.avatar_url ?? "/lovable-uploads/f77014f9-190b-49ff-902d-3d1981b8391e.jpg"}
+            />
+          )}
         </div>
         <button
           onClick={goEdit}
