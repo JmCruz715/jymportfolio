@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { useAdmin } from "@/hooks/useAdmin";
+import { isVideoUrl } from "@/lib/utils";
 
 const ProfileCard = () => {
   const { settings } = useSiteSettings();
