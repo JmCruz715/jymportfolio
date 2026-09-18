@@ -83,7 +83,7 @@ const AdminEditor = () => {
     const path = `avatar-${Date.now()}.${ext}`;
     const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, {
       cacheControl: "3600",
-      upsert: true,
+      upsert: false,
       contentType: file.type,
     });
     if (upErr) {
@@ -490,7 +490,7 @@ const CoverUploader = ({ value, onChange }: { value: string; onChange: (v: strin
     const ext = file.name.split(".").pop() || "jpg";
     const path = `cover-${Date.now()}.${ext}`;
     const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, {
-      cacheControl: "3600", upsert: true, contentType: file.type,
+      cacheControl: "3600", upsert: false, contentType: file.type,
     });
     if (upErr) {
       setBusy(false);
