@@ -296,6 +296,10 @@ const Shop = () => {
                 <p className="text-xs text-muted-foreground mb-3">
                   Premium anti-sweat gaming fingersleeves for mobile gaming.
                 </p>
+                <div className="flex items-center justify-between mb-3 border-y border-border py-2 text-xs">
+                  <span className="text-muted-foreground">Stock: <strong className="text-foreground">14K</strong></span>
+                  <span className="text-muted-foreground">Cancelled: <strong className="text-foreground">12K</strong></span>
+                </div>
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50">
                     <div>
