@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { ArrowLeft, LogOut, Plus, Trash2, Save, Eye, Camera, Loader2 } from "lucide-react";
+import { ArrowLeft, LogOut, Plus, Trash2, Save, Eye, Camera, Loader2, WalletCards } from "lucide-react";
 import { AdminAIChat } from "@/components/AdminAIChat";
 import { AdminMediaManager } from "@/components/AdminMediaManager";
 import { isVideoUrl } from "@/lib/utils";
@@ -156,6 +156,19 @@ const AdminEditor = () => {
 
         {/* AI ASSISTANT (inline, sa taas ng profile) */}
         <AdminAIChat onChanged={reload} inline />
+
+        <div className="liquid-panel p-5 flex items-center justify-between gap-4 animate-liquid-in">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-md bg-primary/10 text-primary flex items-center justify-center">
+              <WalletCards className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold text-foreground">GCash</h2>
+              <p className="text-xs text-muted-foreground">Balanse</p>
+            </div>
+          </div>
+          <p className="text-lg sm:text-xl font-bold text-destructive tabular-nums">−₱590,000.00</p>
+        </div>
 
         {/* PROFILE */}
         <Section title="Profile">
